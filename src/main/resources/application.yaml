@@ -1,0 +1,8 @@
+server:
+  port: 8001
+spring:
+  datasource:
+    username: root
+    password: Qiyue233
+    url: jdbc:mysql://120.25.226.244:3306/BookManagement?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
