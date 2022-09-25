@@ -2,12 +2,16 @@ package com.example.books.bean;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
-
-@TableName("books")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@TableName("books")
+
 public class Books {
     @TableField("id")
     int id;
