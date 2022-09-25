@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class StaticController {
     @GetMapping("index")
     public String gotoIndex(){
-        return "index";
+        return "html/index";
     }
 }
