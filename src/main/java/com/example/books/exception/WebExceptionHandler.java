@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @ControllerAdvice
 @ResponseBody
-public class webExceptionHandler {
+public class WebExceptionHandler {
 
-    @ExceptionHandler(value =webException.class)
-    public Msg webException(webException e){
+    @ExceptionHandler(value = WebException.class)
+    public Msg webException(WebException e){
         return Msg.fail(e.getErrorMsg());
     }
 

@@ -10,11 +10,11 @@ import lombok.Data;
  */
 
 @Data
-public class webException extends RuntimeException{
+public class WebException extends RuntimeException{
 
     private String errorMsg;
 
-    public webException(String errorMsg){
+    public WebException(String errorMsg){
         this.errorMsg=errorMsg;
     }
 }
