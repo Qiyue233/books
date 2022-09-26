@@ -7,14 +7,15 @@
 		<meta name="author" content="">
 		<title>Signin Template for Bootstrap</title>
 		<!-- Bootstrap core CSS -->
-		<link href="asserts/css/bootstrap.min.css" rel="stylesheet">
+		<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
 		<!-- Custom styles for this template -->
-		<link href="asserts/css/signin.css" rel="stylesheet">
+		<link th:href="@{/css/signin.css}" rel="stylesheet">
 	</head>
 
 	<body class="text-center">
 		<form class="form-signin" action="dashboard.html">
-			<img class="mb-4" src="asserts/img/bootstrap-solid.svg" alt="" width="72" height="72">
+			<img class="mb-4" th:src="@{/img/bootstrap-solid.svg}" alt="" width="72" height="72">
 			<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 			<label class="sr-only">Username</label>
 			<input type="text" class="form-control" placeholder="Username" required="" autofocus="">
