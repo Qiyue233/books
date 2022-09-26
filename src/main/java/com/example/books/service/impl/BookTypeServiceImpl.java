@@ -9,3 +9,4 @@ import org.springframework.stereotype.Service;
 @Service
 public class BookTypeServiceImpl extends ServiceImpl<BookTypeMapper, BookType> implements BookTypeService {
 }
+
