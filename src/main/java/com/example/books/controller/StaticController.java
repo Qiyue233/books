@@ -9,4 +9,9 @@ public class StaticController {
     public String gotoIndex(){
         return "html/index";
     }
+
+    @GetMapping("/main")
+    public String gotoDashboard(){
+        return "html/dashboard";
+    }
 }
