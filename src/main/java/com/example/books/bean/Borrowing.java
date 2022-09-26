@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@TableName("Borrowing")
+@TableName("borrowing")
 public class Borrowing {
     @TableField("id")
     int id;
