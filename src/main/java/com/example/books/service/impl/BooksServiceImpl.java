@@ -15,6 +15,7 @@ public class BooksServiceImpl extends ServiceImpl<BooksMapper, Books> implements
     @Resource
     BooksMapper booksMapper;
 
+
     @Override
     public Msg getBookByName(String BookName) {
         return Msg.success().add("books",booksMapper.selectByName(BookName));
@@ -27,4 +28,7 @@ public class BooksServiceImpl extends ServiceImpl<BooksMapper, Books> implements
                 author,outDate,entireNumber,setPrice,intPrice);
         return Msg.success();
     }
+
+
+
 }

@@ -6,12 +6,15 @@ import com.example.books.service.BooksService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
-@ResponseBody
+
 public class BooksController {
 
     @Resource
@@ -34,6 +37,7 @@ public class BooksController {
 
         return booksService.putBook(isbn,cip,type,name,content,
                 author,outDate,entireNumber,setPrice,intPrice);
+
     }
 
 }

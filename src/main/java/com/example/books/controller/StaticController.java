@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class StaticController {
-    @GetMapping("index")
+   /* @GetMapping("index")
     public String gotoIndex(){
         return "html/index";
     }
@@ -13,5 +13,5 @@ public class StaticController {
     @GetMapping("/main")
     public String gotoDashboard(){
         return "html/dashboard";
-    }
+    }*/
 }
