@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-
+@ResponseBody
 public class BooksController {
 
     @Resource

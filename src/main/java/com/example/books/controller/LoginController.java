@@ -1,26 +1,25 @@
 package com.example.books.controller;
 
+import com.example.books.bean.Msg;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
 @Controller
+@ResponseBody
 public class LoginController {
     @PostMapping("/login")
-    public String login(@RequestParam("username") String username,
-                        @RequestParam("password") String password,
-                        Model model, HttpSession session){
+    public Msg login(String username,String password){
         if(!StringUtils.isEmpty(username)&&password.equals("123456")){
-            session.setAttribute("LoginUserName",username);
-            return "redirect:/main.html";
+            return Msg.success().add("success","登录保持");
         }else {
-            model.addAttribute("msg","账号或密码错误");
-            return "login";
+            return Msg.fail("error").add("error","账号密码错误");
         }
     }
     @PostMapping("toRegister")

@@ -5,13 +5,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class StaticController {
-   /* @GetMapping("index")
+    @GetMapping("/")
+    public String gotoLogin(){
+        return "login";
+    }
+    @GetMapping("index")
     public String gotoIndex(){
-        return "html/index";
+        return "index";
     }
 
-    @GetMapping("/main")
-    public String gotoDashboard(){
-        return "html/dashboard";
-    }*/
+    @GetMapping("/register")
+    public String gotoRegister(){
+        return "register";
+    }
 }

@@ -6,33 +6,7 @@
     <meta charset="UTF-8">
     <title>登录</title>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-    <style>
-        /*html, body {*/
-        /*    height: 100%;*/
-        /*}*/
-        html, body {
-            height: 100%;
-        }
-
-        body {
-            display: flex;
-            padding: 40px 40px;
-            background-color: #8EC5FC;
-            background-image: -webkit-linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
-            background-image: -moz-linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
-            background-image: -o-linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
-            background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
-        }
-
-        .box1 {
-            width: 60%;
-            margin-top: 60px;
-        }
-
-        .box2 {
-            margin: 120px auto;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
 <body>
 <div class="box1">
@@ -66,41 +40,25 @@
 
 <div class="box2">
     <h1 style="margin-bottom: 40px">欢迎使用图书管理系统</h1>
+
     <div>
-        <span style="color:red" th:text="${msg}"></span>
-        <form th:action="@{/login}" method="post">
-            <div class="form-group">
-                <label for="username" class="">用户名:</label>
-                <input type="text" class="form-control" id="username" name="username">
-            </div>
-            <div class="form-group">
-                <label for="password" class="">密码:</label>
-                <input type="password" class="form-control" id="password" name="password">
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="role" id="exampleRadios1" value="user" checked>
-                <label class="form-check-label" for="exampleRadios1">
-                    学生
-                </label>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input class="form-check-input" type="radio" name="role" id="exampleRadios2" value="admin">
-                <label class="form-check-label" for="exampleRadios2">
-                    管理员
-                </label>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1"
-                       aria-label="..."> 记住我
-            </div>
-            <input type="submit" class="btn btn-primary btn-lg" value="登&nbsp;&nbsp;&nbsp;&nbsp;录"
-                   style="margin-top: 20px">
-        </form>
-        <form th:action="@{/toRegister}" method="post">
-            <input type="submit" class="btn btn-link" value="没有账号？点击立即注册" style="float: right">
-        </form>
+        <div class="form-group">
+            <label class="">用户名:</label>
+            <input type="text" class="form-control" id="username" name="username">
+        </div>
+        <div class="form-group">
+            <label class="">密码:</label>
+            <input type="password" class="form-control" id="password" name="password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg" style="margin-top: 20px" onclick="login()">登&nbsp;&nbsp;&nbsp;&nbsp;录</button>
     </div>
 </div>
+
+
+
 <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script th:src="@{/js/login.js}"></script>
 </body>
 </html>
