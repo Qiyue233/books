@@ -1,21 +1,33 @@
 package com.example.books.controller;
 
 import com.example.books.bean.Msg;
+import com.example.books.service.LoginService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @ResponseBody
 public class LoginController {
-    @PostMapping("/login")
-    public Msg login(String username,String password){
-        if(!StringUtils.isEmpty(username)&&password.equals("123456")){
-            return Msg.success().add("success","登录保持");
-        }else {
-            return Msg.fail("error").add("error","账号密码错误");
-        }
+
+    @Resource
+    LoginService loginService;
+    @GetMapping("/key")
+    public Msg Key(String user){
+        return loginService.getKey(user);
+    }
+    @GetMapping("/record")
+    public Msg record(String username,String password){
+        return loginService.record(username,password);
+    }
+    @PostMapping("/register")
+    public Msg register(String username,String password){
+        return loginService.register(username,password);
     }
 }

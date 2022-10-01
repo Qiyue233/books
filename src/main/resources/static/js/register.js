@@ -1,8 +1,13 @@
 let Key = "";
-function login(){
+function register(){
     const user = $("#username").val();
     const password = $("#password").val();
-    loginAjax(user,password);
+    const password_R= $("#password-R").val();
+    if (password!=password_R){
+        return ;
+    }
+    const tel= $("#telNumber").val();
+    registerAjax(user,password,tel);
 }
 function jm(content){
     const encrypt=new JSEncrypt();
@@ -16,15 +21,15 @@ function getKeyAjax(user){
         async: false,
         data: {user:user},
         success:function (result){
-        if (result.code==200){
-            Key=result.extend.key;
-        }else {
+            if (result.code==200){
+                Key=result.extend.key;
+            }else {
 
+            }
         }
-    }
     })
 }
-function loginAjax(user,password){
+function registerAjax(user,password,tel){
     getKeyAjax(user);
     if (Key!=""){
         password=jm(password);
@@ -32,15 +37,15 @@ function loginAjax(user,password){
         return;
     }
     $.ajax({
-        url:'/record',
-        type:"GET",
+        url:'/register',
+        type:"POST",
         headers:{},
         data: {username:user,password:password},
         success:function (result){
             if (result.code==200){
-                window.location.href="index";
+                window.location.href="/";
             }else {
-                alert(result.msg);
+
             }
         }
     });

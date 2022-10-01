@@ -49,6 +49,7 @@
             <label class="">密码:</label>
             <input type="password" class="form-control" id="password" name="password">
         </div>
+        <div><a th:href="@{register}">注册账号</a></div>
         <button type="submit" class="btn btn-primary btn-lg" style="margin-top: 20px" onclick="login()">登&nbsp;&nbsp;&nbsp;&nbsp;录</button>
     </div>
 </div>
@@ -58,6 +59,7 @@
 <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script th:src="@{/js/jsencrypt.js}"></script>
 <script th:src="@{/js/login.js}"></script>
 </body>
 </html>

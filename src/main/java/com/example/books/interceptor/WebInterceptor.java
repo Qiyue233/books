@@ -15,7 +15,7 @@ public class WebInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("interceptor preHandle");
+//        System.out.println("interceptor preHandle");
         return true;
     }
 
@@ -25,7 +25,7 @@ public class WebInterceptor implements HandlerInterceptor {
      */
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        System.out.println("interceptor postHandle");
+//        System.out.println("interceptor postHandle");
         // TODO
     }
 
@@ -35,7 +35,7 @@ public class WebInterceptor implements HandlerInterceptor {
      */
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        System.out.println("interceptor afterCompletion");
+//        System.out.println("interceptor afterCompletion");
         // TODO
     }
 }

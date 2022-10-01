@@ -6,3 +6,7 @@ spring:
     password: Qiyue233
     url: jdbc:mysql://120.25.226.244:3306/BookManagement?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 120.25.226.244
+    port: 6379
+    password: 233233

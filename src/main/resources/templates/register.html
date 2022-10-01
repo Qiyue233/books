@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"
+<html lang="ch"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:shiro="http://www.thymeleaf.org/thymeleaf-extras-shiro">
@@ -7,89 +7,50 @@
     <meta charset="UTF-8">
     <title>图书管理系统</title>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-    <style>
-        nav {
-            font-size: 1.5rem;
-            background-color: #21D4FD;
-            background-image: -webkit-linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
-            background-image: -moz-linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
-            background-image: -o-linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
-            background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
-        }
-
-        h1 {
-            font-size: 2rem;
-            color: white;
-        }
-
-        li {
-            margin: 10px 20px;
-        }
-
-        th {
-            width: 100px;
-        }
-
-        label {
-            margin: auto;
-            padding-right: 20px;
-        }
-
-        .input-group {
-            margin-bottom: 10px;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/register.css}">
 </head>
 <body>
-<div>
-    <h1 align="center" style="background-color: #005cbf">欢迎来到注册页面</h1>
+<div class="row top">
+    <div class="col"></div>
+    <div class="col-2 top-1">欢迎注册</div>
+    <div class="col-6"></div>
+    <div class="col-2 top-2">已有账号？请登录></div>
 </div>
 
-<div class="container" align="center">
-    <br>
-    <br>
-    <br>
-    <form th:action="@{/register}" method="post">
-        <div>
-            <span th:text="${msg}" style="background-color: red"></span>
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <div class="row form-li">
+            <div class="col-4"><label>账号</label></div>
+            <div class="col-7"><input type="text" class="form-control " id="username"></div>
         </div>
-        <div class="input-group" style="width: 400px">
-            <label for="username">账&nbsp;&nbsp;&nbsp;&nbsp;号</label>
-            <input type="text" class="form-control" id="username" name="username" required>
+        <div class="row form-li">
+            <div class="col-4"><label>密码</label></div>
+            <div class="col-7"><input type="password" class="form-control" id="password"></div>
         </div>
-        <div class="input-group" style="width: 400px">
-            <label for="password">密&nbsp;&nbsp;&nbsp;&nbsp;码</label>
-            <input type="password" class="form-control" id="password" name="password" required>
+        <div class="row form-li">
+            <div class="col-4"><label>确认密码</label></div>
+            <div class="col-7"><input type="password" class="form-control" id="password-R"></div>
         </div>
-        <div class="input-group" style="width: 400px">
-            <label for="sex">性&nbsp;&nbsp;&nbsp;&nbsp;别</label>
-            <input type="text" class="form-control" id="sex" name="sex" required>
+        <div class="row form-li">
+            <div class="col-4"><label>手机号</label></div>
+            <div class="col-7"><input type="text" class="form-control" id="telNumber"></div>
         </div>
-        <div class="input-group" style="width: 400px">
-            <label for="birth">生&nbsp;&nbsp;&nbsp;&nbsp;日</label>
-            <input type="text" class="form-control" id="birth" name="birth" required>
+        <div class="row form-li">
+            <div class="col-3"><input type="text" class="form-control" id="yzm"></div>
+            <div class="col-4" style="font-size: 16px">获取验证码</div>
         </div>
-        <div class="input-group" style="width: 400px">
-            <label for="address">地&nbsp;&nbsp;&nbsp;&nbsp;址</label>
-            <input type="text" class="form-control" id="address" name="address" required>
+        <div class="row form-li">
+            <div class="col-4"></div>
+            <div class="col-6"><button type="button" class="btn btn-success btn-lg" onclick="register()">注 册</button></div>
         </div>
-        <div class="input-group" style="width: 400px">
-            <label for="telcode">手机号</label>
-            <input type="text" class="form-control" id="telcode" name="telcode" required>
-        </div>
-        <input type="hidden" name="state" value="0">
-        <input type="hidden" name="role" value="user">
-        <input type="submit" value="注    册" class="btn btn-outline-primary btn-lg">
-        <a th:href="@{/login}" class="btn btn-outline-secondary btn-lg" style="margin-left: 40px">取&nbsp;&nbsp;&nbsp;&nbsp;消</a>
-    </form>
-    <form th:action="@{/login}" method="post">
-        <input type="submit" a th:href="@{/login}" class="btn btn-link" value="已有账号？点击立即登录" style="float: right">
-    </form>
-
+    </div>
 </div>
 
 <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script th:src="@{/js/jsencrypt.js}"></script>
+<script th:src="@{/js/register.js}"></script>
 </body>
 </html>

@@ -47,6 +47,16 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+        <!-- redis -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+        </dependency>
+
         <!--mybatis数据库访问-->
         <dependency>
             <groupId>com.baomidou</groupId>
