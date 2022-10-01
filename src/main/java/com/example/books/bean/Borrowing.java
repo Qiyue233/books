@@ -14,7 +14,6 @@ public class Borrowing {
     @TableField("id")
     int id;
     @TableField("bookId")
-
     int bookId;
     @TableField("back")
     boolean back;

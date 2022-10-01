@@ -31,13 +31,14 @@
             float: right;
         }
     </style>
+
 </head>
 <body>
 <!--导航栏替换-->
 <div th:replace="~{commons/commons :: topbar(active='books.html')}"></div>
 
 <div class="container" style="margin-top: 40px">
-    <a th:href="@{/admin/book/toAdd}" class="btn btn-outline-primary btn-lg">添&nbsp;&nbsp;&nbsp;&nbsp;加</a>
+    <a th:href="@{/putBook}" class="btn btn-outline-primary btn-lg">添&nbsp;&nbsp;&nbsp;&nbsp;加</a>
     <form th:action="@{/admin/book/searchBook}" id="searchBox">
         <div class="input-group">
             <input type="text" class="form-control" placeholder="输入关键词..." name="keyword">
@@ -45,9 +46,8 @@
         </div>
     </form>
     <div style="clear: both"></div>
-    <table class="table table-hover" style="margin-top: 20px">
+    <table id="table" class="table table-hover" style="margin-top: 20px">
         <thead>
-        <tr>
             <th>书名</th>
             <th>ISBN</th>
             <th>类型</th>
@@ -56,40 +56,10 @@
             <th>出版社</th>
             <th>剩余数量</th>
             <th>售价</th>
-            <th></th>
             <th>操作</th>
-            <th></th>
-        </tr>
         </thead>
-        <tbody>
-        <tr th:each="book:${books}">
-            <td th:text="${book.getName()}"></td>
-            <td th:text="${book.getIsbn()}"></td>
-            <td th:text="${book.getType()}"></td>
-            <td th:text="${book.getAuthor()}"></td>
-            <td th:text="${book.getOutDate()}"></td>
-            <td th:text="${book.getPublisher()}"></td>
-            <td th:text="${book.getInNumber()}"></td>
-            <td th:text="${book.getOutPrice()}"></td>
-            <td><a th:href="@{'/admin/book/info/' + ${book.getId()}}" class="btn btn-outline-success">详情</a></td>
-            <td><a th:href="@{'/admin/book/toUpdate/' + ${book.getId()}}" class="btn btn-outline-info">编辑</a></td>
-            <td><a th:href="@{'/admin/book/delete/' + ${book.getId()}}" class="btn btn-outline-danger">删除</a></td>
-        </tr>
-
-        </tbody>
-
+        <tbody id="Tbody"></tbody>
     </table>
-   <!-- <ul class="pagination" style="margin-left: 300px">
-        <li ><a href="#" th:href="@{/admin/book/books}" class="page-item">首页</a></li>
-        <li class="active"><a href="#" th:href="@{/admin/book/books(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a></li>
-        <li class="page-item"><span th:text="当前第+${pageInfo.pageNum}+页"</span></li>
-        <li class="page-item"><span th:text="共+${pageInfo.pages}+页"</span></li>
-        <li class="page-item"><a href="#"
-                                 th:href="@{/admin/book/books(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a></li>
-
-        <li class="page-item"><a href="#" th:href="@{/admin/book/books(pageNum=${pageInfo.pages})}">尾页</a></li>
-    </ul>-->
-
 
 </div>
 
@@ -97,5 +67,6 @@
 <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script th:src="@{js/book_all.js}"></script>
 </body>
 </html>

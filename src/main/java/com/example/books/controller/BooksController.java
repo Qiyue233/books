@@ -22,7 +22,7 @@ public class BooksController {
 
     @GetMapping("/getAllBooks")
     public Msg getAllBook(){
-        return Msg.success().add("books",booksService.list());
+        return Msg.success().add("books",booksService.list()).add("nums",booksService.count());
     }
     @GetMapping("/getBooksByName")
     public Msg getBookByName(String bookName){
@@ -31,12 +31,12 @@ public class BooksController {
 
     @PostMapping("/putBook")
     public Msg putBook(String isbn,String cip,int type
-            ,String name,String content,String author
-            ,String outDate,String entireNumber
-            ,double setPrice,double intPrice){
+            ,String book_name,String content,String author
+            ,String out_date,String entire_number
+            ,double int_price,double set_price){
 
-        return booksService.putBook(isbn,cip,type,name,content,
-                author,outDate,entireNumber,setPrice,intPrice);
+        return booksService.putBook(isbn,cip,type,book_name,content,
+                author,out_date,entire_number,int_price,set_price);
 
     }
 

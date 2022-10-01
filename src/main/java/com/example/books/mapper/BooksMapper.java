@@ -15,11 +15,14 @@ public interface BooksMapper extends BaseMapper<Books> {
     @Select("SELECT * from books where book_name= #{name} ;")
     List<Books> selectByName(@Param("name") String name);
 
-    @Insert("insert into BookManagement.books(id, isbn, cip, type, book_name, content, author, out_date, publisher, entire_number, in_number, set_price, int_price, out_price) " +
-            "values (#{isbn},#{cip},#{type},#{name},#{content},#{author},#{outDate},#{entireNumber},#{setPrice},#{intPrice});")
+    @Insert("INSERT INTO BookManagement.books (isbn, cip, type, book_name, content, author, out_date, entire_number, set_price, int_price)" +
+            "values (#{isbn},#{cip},#{type}," +
+            "#{book_name},#{content},#{author}," +
+            "#{out_date},#{entire_number}," +
+            "#{set_price},#{int_price});")
     void  insert(@Param("isbn") String isbn,@Param("cip") String cip,@Param("type") int type
-            ,@Param("name") String name,@Param("content") String content,@Param("author") String author
-            ,@Param("outDate") String outDate,@Param("entireNumber") String entireNumber
-            ,@Param("setPrice") double setPrice,@Param("intPrice") double intPrice);
+            ,@Param("book_name") String book_name,@Param("content") String content,@Param("author") String author
+            ,@Param("out_date") String out_date,@Param("entire_number") String entire_number
+            ,@Param("set_price") double set_price,@Param("int_price")double int_price);
 
 }

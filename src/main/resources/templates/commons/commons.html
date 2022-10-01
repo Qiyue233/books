@@ -15,30 +15,34 @@
         </li>
         <li class="nav-item">
             <a th:class="${active=='books.html'? 'nav-link active' : 'nav-link'}"
-               th:href="@{/books}">图书管理</a>
+              th:href="@{/books}">图书管理</a>
         </li>
         <li class="nav-item">
-            <a th:class="${active=='readers.html'? 'nav-link active' : 'nav-link'}" th:href="@{/admin/reader/readers}">读者管理</a>
+            <a th:class="${active=='readers.html'? 'nav-link active' : 'nav-link'}"
+               th:href="@{/readers}">读者管理</a>
         </li>
         <li class="nav-item">
-            <a th:class="${active=='records.html'? 'nav-link active' : 'nav-link'}" th:href="@{/admin/record/records}">借还管理</a>
-        </li>
-    </ul>
-
-    <ul class="navbar-nav" shiro:hasPermission="user">
-        <li>
-            <a th:class="${active=='index.html'? 'nav-link active' : 'nav-link'}" th:href="@{/index}">图书管理系统</a>
-        </li>
-        <li class="nav-item">
-            <a th:class="${active=='books.html'? 'nav-link active' : 'nav-link'}"
-               th:href="@{/reader/book/books}">图书信息</a>
+            <a th:class="${active=='records.html'? 'nav-link active' : 'nav-link'}"
+               th:href="@{/records}">借还管理</a>
         </li>
         <li class="nav-item">
             <a th:class="${active=='ownRecord.html'? 'nav-link active' : 'nav-link'}"
-               th:href="@{'/reader/record/records/' + ${session.username}}">借阅记录</a>
+               th:href="@{/ownRecord}">借阅记录</a>
+        </li>
+    </ul>
+
+    <!--<ul class="navbar-nav" shiro:hasPermission="user">
+        <li>
+            <a th:class="${active=='index.html'? 'nav-link active' : 'nav-link'}"
+            th:href="@{/index}">图书管理系统</a>
+        </li>-->
+     <!--   <li class="nav-item">
+            <a th:class="${active=='books.html'? 'nav-link active' : 'nav-link'}"
+               th:href="@{/reader/book/books}">图书信息</a>
         </li>
 
-    </ul>
+
+    </ul>-->
     <div class="text-white" style="font-size: medium; position: absolute; bottom: 30px; right: 40px">
         <div class="dropdown">
             <a class="dropdown-toggle"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"

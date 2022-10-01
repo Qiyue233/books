@@ -48,13 +48,10 @@
     <table class="table table-hover" style="margin-top: 20px">
         <thead>
         <tr>
-            <th>卡号</th>
             <th>姓名</th>
-            <th>性别</th>
-            <th>生日</th>
-            <th>地址</th>
             <th>电话</th>
             <th>状态</th>
+            <th>借阅书籍</th>
             <th></th>
             <th></th>
             <th>操作</th>
@@ -63,11 +60,9 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="reader, readerStat: ${readers}">
-            <td th:text="${reader.getUsername()}"></td>
-            <td th:text="${reader.getName()}"></td>
-            <td th:text="${reader.getSex()}"></td>
-            <td th:text="${#dates.format(reader.getBirth(),'yyyy-MM-dd')}"></td>
+        <tr th:each="reader : ${readers}">
+            <td th:text="${reader.getUserName()}"></td>
+            <td th:text="${reader.getPhoneNumber()}"></td>
             <td th:text="${reader.getAddress()}"></td>
             <td th:text="${reader.getTelcode()}"></td>
             <div th:switch="${reader.getState()}">

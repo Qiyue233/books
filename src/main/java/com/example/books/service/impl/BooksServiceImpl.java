@@ -22,10 +22,11 @@ public class BooksServiceImpl extends ServiceImpl<BooksMapper, Books> implements
     }
 
     @Override
-    public Msg putBook(String isbn, String cip, int type, String name, String content, String author, String outDate, String entireNumber, double setPrice, double intPrice) {
+    public Msg putBook(String isbn, String cip, int type, String book_name, String content, String author, String out_date, String entire_number, double int_price, double set_price) {
         //TODO 检校
-        booksMapper.insert(isbn,cip,type,name,content,
-                author,outDate,entireNumber,setPrice,intPrice);
+
+        booksMapper.insert(isbn,cip,type,book_name,content,
+                author,out_date,entire_number,set_price,int_price);
         return Msg.success();
     }
 

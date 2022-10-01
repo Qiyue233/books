@@ -40,24 +40,16 @@
     <table class="table table-hover" style="margin-top: 20px">
         <thead>
         <tr>
-            <th>流水号</th>
-            <th>图书号</th>
-            <th>读者卡号</th>
+            <th>书名</th>
+            <th>借阅人</th>
+            <th>联系电话</th>
             <th>借出日期</th>
-            <th>最晚归还日期</th>
+            <th>预计归还日期</th>
+            <th>实际归还日期</th>
             <th>操作</th>
         </tr>
         </thead>
-        <tbody>
-        <tr th:each="record, recordStat: ${records}">
-            <td th:text="${record.getSernum()}"></td>
-            <td th:text="${record.getBookId()}"></td>
-            <td th:text="${record.getUsername()}"></td>
-            <td th:text="${#dates.format(record.getLendDate(),'yyyy-MM-dd')}"></td>
-            <td th:text="${#dates.format(record.getBackDate(),'yyyy-MM-dd')}"></td>
-            <td><a th:href="@{'/admin/record/backBook/' + ${record.getSernum()} + '/' + ${record.getBookId()} + '/' + ${session.username}}" class="btn btn-outline-info" id="1">确认还书</a></td>
-        </tr>
-        </tbody>
+        <tbody id="Tbody"></tbody>
     </table>
 </div>
 

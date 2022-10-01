@@ -18,4 +18,24 @@ public class StaticController {
     public String gotoRegister(){
         return "register";
     }
+    @GetMapping("/books")
+    public String books(){
+        return "/admin/books";
+    }
+    @GetMapping("/putBook")
+    public String putBook(){
+        return "/admin/book_add";
+    }
+    @GetMapping("/readers")
+    public String readers(){
+        return "/admin/readers";
+    }
+    @GetMapping("/records")
+    public String records(){
+        return "/admin/records";
+    }
+    @GetMapping("/ownRecord")
+    public String ownRecord(){
+        return "/user/ownRecord";
+    }
 }

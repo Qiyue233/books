@@ -8,7 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.sql.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,12 +37,12 @@ public class Books {
     String publisher;
     @TableField("entire_number")
     int entireNumber;
-    @TableField("in number")
+    @TableField("in_number")
     int inNumber;
-    @TableField("set price")
+    @TableField("set_price")
     double setPrice;
-    @TableField("int price")
+    @TableField("int_price")
     double intPrice;
-    @TableField("out price")
+    @TableField("out_price")
     double outPrice;
 }
