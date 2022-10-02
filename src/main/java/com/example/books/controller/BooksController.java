@@ -1,26 +1,26 @@
 package com.example.books.controller;
 
 
+import com.example.books.annotation.JwtToken;
 import com.example.books.bean.Msg;
 import com.example.books.service.BooksService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 @ResponseBody
+
 public class BooksController {
 
     @Resource
     BooksService booksService;
 
     @GetMapping("/getAllBooks")
+    @JwtToken
     public Msg getAllBook(){
         return Msg.success().add("books",booksService.list()).add("nums",booksService.count());
     }

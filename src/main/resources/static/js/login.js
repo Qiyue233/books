@@ -24,6 +24,12 @@ function getKeyAjax(user){
     }
     })
 }
+function showTip(msg){
+
+    const tip=$(".tips");
+    tip.empty();
+    tip.append("<p style='color: red'>*"+msg+"</p>");
+}
 function loginAjax(user,password){
     getKeyAjax(user);
     if (Key!=""){
@@ -38,10 +44,12 @@ function loginAjax(user,password){
         data: {username:user,password:password},
         success:function (result){
             if (result.code==200){
+                $.cookie('token', result.extend.token, { path: '/' });
                 window.location.href="index";
             }else {
-                alert(result.msg);
+                showTip(result.msg);
             }
         }
     });
 }
+

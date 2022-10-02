@@ -1,65 +1,79 @@
 <!DOCTYPE html>
-<html lang="en"
+<html lang="ch"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>登录</title>
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{/css/login.css}">
-</head>
-<body>
-<div class="box1">
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner" style="border-radius: 20px">
-            <div class="carousel-item active">
-                <img th:src="@{/img/2.jpg}" class="d-block w-100" alt="...">
+    <head>
+        <meta charset="UTF-8">
+        <title>登录系统</title>
+        <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" th:href="@{/css/login.css}">
+    </head>
+    <body>
+        <div class="row div-content">
+            <div class="col-6">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner" style="border-radius: 20px">
+                        <div class="carousel-item active">
+                            <img th:src="@{/img/2.jpg}" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img th:src="@{/img/3.jpg}" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img th:src="@{/img/4.jpg}" class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
             </div>
-            <div class="carousel-item">
-                <img th:src="@{/img/3.jpg}" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img th:src="@{/img/4.jpg}" class="d-block w-100" alt="...">
+            <div class="col-1"></div>
+            <div class="col-4">
+                <div class="row form-title">欢迎登录系统</div>
+                <div class="row">
+                    <div class="input-group mb-3 col-8" style="padding-left: 0px">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">账号</span>
+                        </div>
+                        <input type="text" id="username" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group mb-3 col-8" style="padding-left: 0px">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">密码</span>
+                        </div>
+                        <input type="password" id="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4"></div>
+                    <a class="text-reset text-decoration-none a-text" th:href="@{register}">还没有账号？请注册</a>
+                </div>
+                <div class="row tips"></div>
+                <div class="row">
+                    <button type="submit" class="btn btn-primary btn-lg" style="margin-top: 20px" onclick="login()">登&nbsp;&nbsp;&nbsp;&nbsp;录</button>
+                </div>
             </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-</div>
 
-<div class="box2">
-    <h1 style="margin-bottom: 40px">欢迎使用图书管理系统</h1>
-    <div>
-        <div class="form-group">
-            <label class="">用户名:</label>
-            <input type="text" class="form-control" id="username" name="username">
-        </div>
-        <div class="form-group">
-            <label class="">密码:</label>
-            <input type="password" class="form-control" id="password" name="password">
-        </div>
-        <div><a th:href="@{register}">注册账号</a></div>
-        <button type="submit" class="btn btn-primary btn-lg" style="margin-top: 20px" onclick="login()">登&nbsp;&nbsp;&nbsp;&nbsp;录</button>
-    </div>
-</div>
+        <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+        <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+        <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script th:src="@{/js/jsencrypt.js}"></script>
+        <script th:src="@{/js/login.js}"></script>
 
-
-
-<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
-<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script th:src="@{/js/jsencrypt.js}"></script>
-<script th:src="@{/js/login.js}"></script>
-</body>
+    </body>
 </html>

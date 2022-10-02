@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="ch"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:shiro="http://www.thymeleaf.org/thymeleaf-extras-shiro">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>图书管理系统</title>
+    <title>欢迎注册</title>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/css/register.css}">
 </head>
@@ -14,7 +13,7 @@
     <div class="col"></div>
     <div class="col-2 top-1">欢迎注册</div>
     <div class="col-6"></div>
-    <div class="col-2 top-2">已有账号？请登录></div>
+    <div class="col-2 top-2"><a class="text-reset text-decoration-none" th:href="@{/}">已有账号？请登录></a></div>
 </div>
 
 <div class="row">
@@ -40,14 +39,19 @@
             <div class="col-3"><input type="text" class="form-control" id="yzm"></div>
             <div class="col-4" style="font-size: 16px">获取验证码</div>
         </div>
+        <div class="row" style="height: 30px;margin-bottom: 11px;">
+            <div class="col-6 tips"></div>
+        </div>
         <div class="row form-li">
             <div class="col-4"></div>
             <div class="col-6"><button type="button" class="btn btn-success btn-lg" onclick="register()">注 册</button></div>
         </div>
+
     </div>
 </div>
 
 <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+
 <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script th:src="@{/js/jsencrypt.js}"></script>

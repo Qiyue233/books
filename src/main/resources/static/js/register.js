@@ -14,6 +14,11 @@ function jm(content){
     encrypt.setPublicKey(Key);
     return  encrypt.encrypt(content);
 }
+function showTip(msg){
+    const tip=$(".tips");
+    tip.empty();
+    tip.append("<p style='color: red'>*"+msg+"</p>");
+}
 function getKeyAjax(user){
     $.ajax({
         url: '/key',
@@ -24,7 +29,7 @@ function getKeyAjax(user){
             if (result.code==200){
                 Key=result.extend.key;
             }else {
-
+                showTip(result.msg);
             }
         }
     })
@@ -45,7 +50,7 @@ function registerAjax(user,password,tel){
             if (result.code==200){
                 window.location.href="/";
             }else {
-
+                showTip(result.msg);
             }
         }
     });

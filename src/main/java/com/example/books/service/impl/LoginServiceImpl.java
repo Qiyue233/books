@@ -4,6 +4,7 @@ import com.example.books.bean.Msg;
 import com.example.books.bean.User;
 import com.example.books.mapper.UserMapper;
 import com.example.books.service.LoginService;
+import com.example.books.util.JWTUtil;
 import com.example.books.util.RSAUtil;
 import com.example.books.util.RandomUtil;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -23,7 +24,6 @@ public class LoginServiceImpl implements LoginService {
     UserMapper userMapper;
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
-
     @Override
     public Msg getKey(String user) {
         KeyPair keyPair;
@@ -38,7 +38,7 @@ public class LoginServiceImpl implements LoginService {
         }
 
         if (privateKey.equals("")||publicKey.equals("")){
-            return Msg.fail("操作失败");
+            return Msg.fail("未知的错误，请稍后重试");
         }
         if (redisTemplate.opsForValue().get(user)!=null){
             redisTemplate.opsForValue().getAndDelete(user);
@@ -50,7 +50,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public Msg register(String username, String password) {
         if (userMapper.countByName(username)>0){
-            return Msg.fail("用户已存在");
+            return Msg.fail("用户名重复，请重新输入！");
         }
         String privateKey= (String) redisTemplate.opsForValue().getAndDelete(username);
         try {
@@ -67,7 +67,7 @@ public class LoginServiceImpl implements LoginService {
     public Msg record(String username, String password) {
         User user=userMapper.selectByName(username);
         if (user==null){
-            return Msg.fail("用户不存在");
+            return Msg.fail("不存在的用户名！请注册");
         }
         String privateKey= (String) redisTemplate.opsForValue().getAndDelete(username);
         try {
@@ -77,8 +77,17 @@ public class LoginServiceImpl implements LoginService {
         String salt=user.getSalt();
         password=DigestUtils.md5DigestAsHex((password+salt).getBytes(StandardCharsets.UTF_8));
         if (!password.equals(user.getPassword())){
-            return Msg.fail("密码错误");
+            return Msg.fail("不正确的密码，请重新输入");
         }
-        return Msg.success();
+
+        //生成token及密钥
+        if (redisTemplate.opsForValue().get(username+"-tokenKey")!=null){
+            redisTemplate.opsForValue().getAndDelete(username+"-tokenKey");
+        }
+        String R=RandomUtil.getRandom();
+        redisTemplate.opsForValue().set(username+"-tokenKey",R,10,TimeUnit.MINUTES);
+        String jwt= JWTUtil.getToken(username,R);
+
+        return Msg.success().add("token",jwt);
     }
 }
