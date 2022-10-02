@@ -39,10 +39,10 @@
 
 <div class="container" style="margin-top: 40px">
     <a th:href="@{/putBook}" class="btn btn-outline-primary btn-lg">添&nbsp;&nbsp;&nbsp;&nbsp;加</a>
-    <form th:action="@{/admin/book/searchBook}" id="searchBox">
+    <form th:action="@{/searchBook}" id="searchBox">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="输入关键词..." name="keyword">
-            <input type="submit" class="input-group-append btn btn-success" value="搜  索">
+            <input type="text" class="form-control" placeholder="输入关键词..." id="keyword" name="keyword">
+            <input type="submit" class="input-group-append btn btn-success"  value="搜  索" onclick="searchName()">
         </div>
     </form>
     <div style="clear: both"></div>

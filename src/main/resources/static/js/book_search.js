@@ -1,11 +1,35 @@
-getAllBook();
-
-function showBooKs(nums,books){
+getSearchName();
+//页面跳转后从cookie中获取
+function getSearchName(){
+    const book_name= $.cookie("searchName");
+    if(book_name!=null){
+        searchBooksByName(book_name);
+    }
+}
+//从当前页面中获取搜索名
+function getInputSearchName(){
+    const book_name = $("#inputName").val();
+    if(book_name!=null){
+        searchBooksByName(book_name);
+    }
+}
+function searchBooksByName(book_name){
+    $.ajax({
+        url:"/getBooksByName",
+        type:"GET",
+        handlers:{},
+        data:{book_name:book_name},
+        success:function (result){
+            searchShow(result.extend.nums,result.extend.books);
+        }
+    });
+}
+function searchShow(nums,books){
     $("#Tbody").empty();
     for(var i=0;i<nums;i++){
         var tr=$("<tr></tr>");
         var id=$("<td></td>").append(i+1);
-        var bookName=$("<td></td>").append(books[i].bookName);
+        var book_name=$("<td></td>").append(books[i].bookName);
         var isbn=$("<td></td>").append(books[i].isbn);
         var type=$("<td></td>").append(books[i].type);
         var author=$("<td></td>").append(books[i].author);
@@ -18,47 +42,9 @@ function showBooKs(nums,books){
         var del=$("<button></button>").append("删除").attr("onclick","del("+books[i].id+")")
             .addClass("btn btn-outline-danger").attr("type","button");
         var but=$("<td></td>").append(update).append(" ").append(del);
-        tr.append(id).append(bookName).append(isbn).append(type).append(author).append(outDate)
+        tr.append(id).append(book_name).append(isbn).append(type).append(author).append(outDate)
             .append(publisher).append(inNumber).append(outPrice).append(but);
         tr.appendTo("#Tbody")
     }
     $("#table").addClass("table table-hover")
-}
-function getAllBook(){
-    $.ajax({
-        url:"/getAllBooks",
-        type:"GET",
-        handlers:{},
-        data:{},
-        success:function (result){
-            if(result.code==200){
-                showBooKs(result.extend.nums,result.extend.books);
-            }
-        }
-    })
-}
-
-function update(id){
-    $.cookie('updateBookId', id, {  path: '/' });
-    window.location.href="update";
-}
-function del(id){
-    $.ajax({
-        url:"/del",
-        type: "GET",
-        handlers: {},
-        data: {id:id},
-        success:function (result){
-            window.location.href="books";
-        }
-    });
-}
-
-function searchName(){
-    const name=$("#keyword").val();
-    searchBook(name);
-}
-function searchBook(name){
-    $.cookie('searchName', name, {  path: '/' });
-    window.location.href="searchBook";
 }

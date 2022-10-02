@@ -13,7 +13,6 @@ public class StaticController {
     public String gotoIndex(){
         return "index";
     }
-
     @GetMapping("/register")
     public String gotoRegister(){
         return "register";
@@ -29,6 +28,10 @@ public class StaticController {
     @GetMapping("/update")
     public String update(){
         return "/admin/book_edit";
+    }
+    @GetMapping("searchBook")
+    public String searchBook(){
+        return "/admin/book_search_result.html";
     }
     @GetMapping("/readers")
     public String readers(){

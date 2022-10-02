@@ -7,7 +7,7 @@ import com.example.books.bean.Msg;
 
 
 public interface BooksService extends IService<Books> {
-    public Msg getBookByName(String bookName);
+    public Msg getBookByName(String book_name);
     public Msg putBook(String isbn,String cip,int type
             ,String name,String content,String author
             ,String out_date,int entire_number
@@ -15,4 +15,7 @@ public interface BooksService extends IService<Books> {
 
     public Msg getBookById(int id);
     public Msg update(String content, int in_number,double out_price,double int_price,String isbn);
+    public Msg del(int id);
+
+    public int countByName(String book_name);
 }

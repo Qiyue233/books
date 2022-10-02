@@ -20,8 +20,8 @@ public class BooksServiceImpl extends ServiceImpl<BooksMapper, Books> implements
 
 
     @Override
-    public Msg getBookByName(String BookName) {
-        return Msg.success().add("books",booksMapper.selectByName(BookName));
+    public Msg getBookByName(String book_name) {
+        return Msg.success().add("books",booksMapper.selectByName(book_name));
     }
 
     @Override
@@ -43,6 +43,17 @@ public class BooksServiceImpl extends ServiceImpl<BooksMapper, Books> implements
     public Msg update(String content, int in_number,double out_price,double int_price,String isbn) {
         booksMapper.update(content, in_number, out_price, int_price,isbn);
         return Msg.success();
+    }
+
+    @Override
+    public Msg del(int id) {
+        booksMapper.deleteById(id);
+        return  Msg.success();
+    }
+
+    @Override
+    public int countByName(String book_name) {
+        return  booksMapper.selectCountByName(book_name);
     }
 
 

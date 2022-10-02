@@ -9,8 +9,8 @@ import java.util.List;
 @Mapper
 public interface BooksMapper extends BaseMapper<Books> {
 
-    @Select("SELECT * from books where book_name= #{name} ;")
-    List<Books> selectByName(@Param("name") String name);
+    @Select("SELECT * from books where book_name= #{book_name} ;")
+    List<Books> selectByName(@Param("book_name") String book_name);
 
     @Select("SELECT * from books where id= #{id} ;")
     Books selectBookById(@Param("id") int id);
@@ -28,4 +28,7 @@ public interface BooksMapper extends BaseMapper<Books> {
     void update(@Param("content") String content,@Param("in_number") int in_number
             ,@Param("out_price") double out_price,@Param("int_price")double int_price
             ,@Param("isbn") String isbn);
+
+    @Select("SELECT COUNT(*) FROM BookManagement.books WHERE book_name=#{book_name}")
+    int selectCountByName(String book_name);
 }

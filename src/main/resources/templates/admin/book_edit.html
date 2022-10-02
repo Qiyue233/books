@@ -62,15 +62,15 @@
         </div>
         <div class="input-group">
             <label for="author">作&nbsp;&nbsp;&nbsp;&nbsp;者</label>
-            <input type="text" class="form-control" id="author" name="author" >
+            <input type="text" class="form-control" id="author" name="author"  disabled="true">
         </div>
         <div class="input-group">
             <label for="type">类&nbsp;&nbsp;&nbsp;&nbsp;别</label>
-            <input type="text" class="form-control" id="type" name="type" >
+            <input type="text" class="form-control" id="type" name="type"  disabled="true">
         </div>
         <div class="input-group">
             <label for="publisher">出版社</label>
-            <input type="text" class="form-control" id="publisher" name="publisher" >
+            <input type="text" class="form-control" id="publisher" name="publisher"  disabled="true">
         </div>
         <div class="input-group">
             <label for="content">简&nbsp;&nbsp;&nbsp;&nbsp;介</label>
@@ -78,7 +78,7 @@
         </div>
         <div class="input-group">
             <label for="out_date">出&nbsp;版&nbsp;时&nbsp;间</label>
-            <input class="form-control" id="out_date" name="out_date" ></input>
+            <input class="form-control" id="out_date" name="out_date"  disabled="true"></input>
         </div>
         <div class="input-group">
             <label for="in_number">剩&nbsp;余&nbsp;数&nbsp;量</label>
@@ -93,7 +93,7 @@
             <input type="text" class="form-control" id="out_price" name="out_price" >
         </div>
         <button type="submit" value="提    交" class="btn btn-outline-primary btn-lg" onclick="update()">提&nbsp;&nbsp;&nbsp;&nbsp;交</button>
-        <a th:href="@{/admin/book/books}" class="btn btn-outline-secondary btn-lg" style="margin-left: 40px">取&nbsp;&nbsp;&nbsp;&nbsp;消</a>
+        <button  class="btn btn-outline-secondary btn-lg" style="margin-left: 40px" onclick="giveUp()">取&nbsp;&nbsp;&nbsp;&nbsp;消</button>
     </div>
 
 </div>
