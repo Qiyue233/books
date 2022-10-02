@@ -45,48 +45,63 @@
 <div th:replace="~{commons/commons :: topbar(active='books.html')}"></div>
 
 <div class="container">
-    <br>
-    <br>
-    <br>
-    <form th:action="@{/admin/book/update}" method="post">
-        <input type="text" hidden name="bookId" th:value="${book.getBookId()}">
-        <div class="input-group">
+
+    <div id="updateContent">
+        <input type="text" hidden name="bookId" >
+        <div class="input-group" id="add_bookName"  >
             <label for="name">书&nbsp;&nbsp;&nbsp;&nbsp;名</label>
-            <input type="text" class="form-control" id="name" name="name" th:value="${book.getName()}">
+            <input type="text" class="form-control" id="name" name="name" disabled="true" value="">
+        </div>
+        <div class="input-group" id="add_isbn"  >
+            <label for="isbn">I&nbsp;S&nbsp;B&nbsp;N</label>
+            <input type="text" class="form-control" id="isbn" name="isbn" disabled="true">
+        </div>
+        <div class="input-group" id="add_cip"  >
+            <label for="cip">c&nbsp;&nbsp;i&nbsp;&nbsp;p</label>
+            <input type="text" class="form-control" id="cip" name="cip" disabled="true">
         </div>
         <div class="input-group">
             <label for="author">作&nbsp;&nbsp;&nbsp;&nbsp;者</label>
-            <input type="text" class="form-control" id="author" name="author" th:value="${book.getAuthor()}">
+            <input type="text" class="form-control" id="author" name="author" >
         </div>
         <div class="input-group">
-            <label for="publish">出版社</label>
-            <input type="text" class="form-control" id="publish" name="publish" th:value="${book.getPublish()}">
+            <label for="type">类&nbsp;&nbsp;&nbsp;&nbsp;别</label>
+            <input type="text" class="form-control" id="type" name="type" >
         </div>
         <div class="input-group">
-            <label for="isbn">I&nbsp;S&nbsp;B&nbsp;N</label>
-            <input type="text" class="form-control" id="isbn" name="isbn" th:value="${book.getIsbn()}">
+            <label for="publisher">出版社</label>
+            <input type="text" class="form-control" id="publisher" name="publisher" >
         </div>
         <div class="input-group">
-            <label for="introduction">简&nbsp;&nbsp;&nbsp;&nbsp;介</label>
-            <textarea class="form-control" id="introduction" name="introduction"
-                      th:text="${book.getIntroduction()}"></textarea>
+            <label for="content">简&nbsp;&nbsp;&nbsp;&nbsp;介</label>
+            <input class="form-control" id="content" name="content" ></input>
         </div>
         <div class="input-group">
-            <label for="price">价&nbsp;&nbsp;&nbsp;&nbsp;格</label>
-            <input type="text" class="form-control" id="price" name="price" th:value="${book.getPrice()}">
+            <label for="out_date">出&nbsp;版&nbsp;时&nbsp;间</label>
+            <input class="form-control" id="out_date" name="out_date" ></input>
         </div>
         <div class="input-group">
-            <label for="state">状&nbsp;&nbsp;&nbsp;&nbsp;态</label>
-            <input type="text" class="form-control" id="state" name="state" th:value="${book.getState()}">
+            <label for="in_number">剩&nbsp;余&nbsp;数&nbsp;量</label>
+            <input class="form-control" id="in_number" name="in_number" ></input>
         </div>
-        <input type="submit" value="提    交" class="btn btn-outline-primary btn-lg">
+        <div class="input-group">
+            <label for="int_price">进&nbsp;&nbsp;&nbsp;价&nbsp;</label>
+            <input type="text" class="form-control" id="int_price" name="int_price" >
+        </div>
+        <div class="input-group">
+            <label for="out_price">售&nbsp;&nbsp;&nbsp;价&nbsp;</label>
+            <input type="text" class="form-control" id="out_price" name="out_price" >
+        </div>
+        <button type="submit" value="提    交" class="btn btn-outline-primary btn-lg" onclick="update()">提&nbsp;&nbsp;&nbsp;&nbsp;交</button>
         <a th:href="@{/admin/book/books}" class="btn btn-outline-secondary btn-lg" style="margin-left: 40px">取&nbsp;&nbsp;&nbsp;&nbsp;消</a>
-    </form>
+    </div>
 
 </div>
 
 <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script th:src="@{js/book_edit.js}"></script>
 </body>
 </html>
