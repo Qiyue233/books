@@ -18,16 +18,22 @@ public class BooksServiceImpl extends ServiceImpl<BooksMapper, Books> implements
     @Resource
     BooksMapper booksMapper;
 
-
     @Override
     public Msg getBookByName(String book_name) {
         return Msg.success().add("books",booksMapper.selectByName(book_name));
     }
 
     @Override
+    public Msg getBookByType(int type) {
+        return  Msg.success().add("books",booksMapper.selectByType(type));
+    }
+    @Override
+    public Msg getBookByIsbn(String isbn) {
+        return Msg.success().add("books",booksMapper.selectByIsbn(isbn));
+    }
+    @Override
     public Msg putBook(String isbn, String cip, int type, String book_name, String content, String author, String out_date, int entire_number, double int_price, double set_price) {
         //TODO 检校
-
         booksMapper.insert(isbn,cip,type,book_name,content,
                 author,out_date,entire_number,set_price,int_price);
         return Msg.success();
@@ -54,6 +60,16 @@ public class BooksServiceImpl extends ServiceImpl<BooksMapper, Books> implements
     @Override
     public int countByName(String book_name) {
         return  booksMapper.selectCountByName(book_name);
+    }
+
+    @Override
+    public int countByType(int type) {
+        return booksMapper.selectCountByType(type);
+    }
+
+    @Override
+    public int countByIsbn(String isbn) {
+        return booksMapper.selectCountByIsbn(isbn);
     }
 
 

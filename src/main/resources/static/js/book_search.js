@@ -1,18 +1,42 @@
 getSearchName();
-//页面跳转后从cookie中获取
+//TODO 页面跳转后从cookie中获取
 function getSearchName(){
-    const book_name= $.cookie("searchName");
-    if(book_name!=null){
+    if($.cookie("searchName")!=null){
+        const book_name= $.cookie("searchName");
         searchBooksByName(book_name);
+    }else if($.cookie("bookType")!=null){
+        alert($.cookie("bookType"))
+        const bookType= $.cookie("bookType");
+        searchBooksByType(bookType)
+    }else if($.cookie("isbn")!=null){
+        const isbn= $.cookie("isbn");
+        searchBooksByIsbn(isbn)
     }
 }
-//从当前页面中获取搜索名
-function getInputSearchName(){
-    const book_name = $("#inputName").val();
-    if(book_name!=null){
-        searchBooksByName(book_name);
-    }
+
+//TODO 从当前页面中获取搜索名
+function selectType(){
+    const type=$("#selectType").val()
+    return type;
 }
+function getSelectTypeAndName(){
+    const type=selectType();
+    if(type==1){
+        //书名
+        const bookName=$("#keyword").val();
+        searchBooksByName(bookName)
+    }else if(type==2){
+        //类别
+        const bookType=$("#keyword").val();
+        searchBooksByType(bookType)
+    }else {
+        //书号(isbn)
+        const isbn=$("#keyword").val();
+        searchBooksByIsbn(isbn)
+    }
+
+}
+
 function searchBooksByName(book_name){
     $.ajax({
         url:"/getBooksByName",
@@ -24,6 +48,29 @@ function searchBooksByName(book_name){
         }
     });
 }
+function searchBooksByType(bookType){
+    $.ajax({
+        url:"/getBooksByType",
+        type:"GET",
+        handlers:{},
+        data:{type:bookType},
+        success:function (result){
+            searchShow(result.extend.nums,result.extend.books);
+        }
+    });
+}
+function  searchBooksByIsbn(isbn){
+    $.ajax({
+        url:"/getBooksByIsbn",
+        type:"GET",
+        handlers:{},
+        data:{isbn:isbn},
+        success:function (result){
+            searchShow(result.extend.nums,result.extend.books);
+        }
+    });
+}
+//TODO 显示查询到的书籍
 function searchShow(nums,books){
     $("#Tbody").empty();
     for(var i=0;i<nums;i++){
@@ -47,4 +94,11 @@ function searchShow(nums,books){
         tr.appendTo("#Tbody")
     }
     $("#table").addClass("table table-hover")
+    if($.cookie("searchName")!=null){
+       $.cookie("searchName",null);
+    }else if($.cookie("bookType")!=null){
+        $.cookie("bookType",null);
+    }else if($.cookie("isbn")!=null){
+        $.cookie("isbn",null);
+    }
 }

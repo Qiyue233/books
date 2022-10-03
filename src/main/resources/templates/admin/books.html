@@ -36,15 +36,58 @@
 <body>
 <!--导航栏替换-->
 <div th:replace="~{commons/commons :: topbar(active='books.html')}"></div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">图书详情</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="input-group">
+                        <label for="isbn" >isbn:</label>
+                        <input type="text" class="form-control" id="isbn">
+                    </div>
+                    <div class="input-group">
+                        <label for="cip" class="col-form-label">cip:</label>
+                        <input class="form-control" id="cip">
+                    </div>
+                    <div class="input-group">
+                        <label for="publisher" class="col-form-label">出版社:</label>
+                        <input class="form-control" id="publisher">
+                    </div>
+                    <div class="input-group">
+                        <label for="out_price">定&nbsp;&nbsp;&nbsp;&nbsp;价</label>
+                        <input type="text" class="form-control" id="out_price"  required>
+                    </div>
 
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container" style="margin-top: 40px">
     <a th:href="@{/putBook}" class="btn btn-outline-primary btn-lg">添&nbsp;&nbsp;&nbsp;&nbsp;加</a>
-    <form th:action="@{/searchBook}" id="searchBox">
+
+    <div th:action="@{/searchBook}" id="searchBox">
+
         <div class="input-group">
+            <select class="custom-select" id="selectType" onchange="selectType()">
+                <option value="0" selected>查找方式</option>
+                <option value="1" selected>根据书名查找</option>
+                <option value="2">根据类别查找</option>
+                <option value="3">根据书号查找</option>
+            </select>
             <input type="text" class="form-control" placeholder="输入关键词..." id="keyword" name="keyword">
-            <input type="submit" class="input-group-append btn btn-success"  value="搜  索" onclick="searchName()">
+            <input type="submit" class="input-group-append btn btn-success"  value="搜  索" onclick="getSelectTypeAndName()">
         </div>
-    </form>
+    </div>
     <div style="clear: both"></div>
     <table id="table" class="table table-hover" style="margin-top: 20px">
         <thead>
@@ -52,11 +95,10 @@
             <th>书名</th>
             <th>ISBN</th>
             <th>类型</th>
-            <th>作者</th>
+            <th>内容</th>
             <th>发行时间</th>
-            <th>出版社</th>
-            <th>剩余数量</th>
-            <th>售价</th>
+            <th>总数量</th>
+            <th>库存</th>
             <th>操作</th>
         </thead>
         <tbody id="Tbody"></tbody>

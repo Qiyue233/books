@@ -27,8 +27,17 @@ public class BooksController {
     //根据书名搜索
     @GetMapping("/getBooksByName")
     public Msg getBookByName(String book_name){
-        System.out.println(booksService.getBookByName(book_name).add("nums",booksService.countByName(book_name)));
         return booksService.getBookByName(book_name).add("nums",booksService.countByName(book_name));
+    }
+    //根据类型搜索
+     @GetMapping("/getBooksByType")
+     public Msg getBooksByType(int type){
+         return booksService.getBookByType(type).add("nums",booksService.countByType(type));
+    }
+    //根据isbn搜索
+     @GetMapping("/getBooksByIsbn")
+     public Msg getBooksByIsbn(String isbn){
+        return booksService.getBookByIsbn(isbn).add("nums",booksService.countByIsbn(isbn));
     }
     //添加书籍
     @PostMapping("/putBook")

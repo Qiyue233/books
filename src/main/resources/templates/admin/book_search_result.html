@@ -39,8 +39,14 @@
     <a  class="btn btn-outline-primary btn-lg">首&nbsp;&nbsp;&nbsp;&nbsp;页</a>
     <div id="searchBox">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="输入关键词..."id="inputName" name="inputName">
-            <input type="submit" class="input-group-append btn btn-success" value="搜  索"  onclick="getInputSearchName()">
+            <select class="custom-select" id="selectType" onchange="selectType()">
+                <option value="0" selected>查找方式</option>
+                <option value="1" selected>根据书名查找</option>
+                <option value="2">根据类别查找</option>
+                <option value="3">根据书号查找</option>
+            </select>
+            <input type="text" class="form-control" placeholder="输入关键词..."id="keyword" name="keyword">
+            <input type="submit" class="input-group-append btn btn-success" value="搜  索"  onclick="getSelectTypeAndName()">
         </div>
     </div>
     <div style="clear: both"></div>
