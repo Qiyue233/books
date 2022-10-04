@@ -30,8 +30,11 @@ function showBooKs(nums,books){
         var type=$("<td></td>").append(books[i].type);
         var content=$("<td></td>").append(books[i].content);
         var outDate=$("<td></td>").append(books[i].outDate);
-        var entire_number=$("<td></td>").append(books[i].entireNumber);
-        var inNumber=$("<td></td>").append(books[i].inNumber);
+        /*var entire_number=$("<td></td>").append(books[i].entireNumber);
+        var inNumber=$("<td></td>").append(books[i].inNumber);*/
+        /*var int_price=$("<td></td>").append(books[i].intPrice);*/
+        var state=$("<td></td>").append(books[i].state);
+        var borrower=$("<td></td>").append(books[i].borrower);
 
         var update=$("<button></button>").append("修改").attr("onclick","update("+books[i].id+")")
             .addClass("btn btn-outline-primary").attr("type","button");
@@ -40,8 +43,9 @@ function showBooKs(nums,books){
         var look=$('<button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">查看</button>')
             .attr("onclick","look("+books[i].id+")");
         var but=$("<td></td>").append(update).append(" ").append(del).append(" ").append(look);
+
         tr.append(id).append(bookName).append(isbn).append(type).append(content).append(outDate)
-            .append(entire_number).append(inNumber).append(but);
+           .append(state).append(borrower).append(but);
         tr.appendTo("#Tbody")
     }
     $("#table").addClass("table table-hover")
@@ -70,7 +74,7 @@ function del(id){
         handlers: {},
         data: {id:id},
         success:function (result){
-            window.location.href="books";
+            getAllBook();
         }
     });
 }

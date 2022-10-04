@@ -5,7 +5,6 @@ function getSearchName(){
         const book_name= $.cookie("searchName");
         searchBooksByName(book_name);
     }else if($.cookie("bookType")!=null){
-        alert($.cookie("bookType"))
         const bookType= $.cookie("bookType");
         searchBooksByType(bookType)
     }else if($.cookie("isbn")!=null){
@@ -81,24 +80,55 @@ function searchShow(nums,books){
         var type=$("<td></td>").append(books[i].type);
         var author=$("<td></td>").append(books[i].author);
         var outDate=$("<td></td>").append(books[i].outDate);
-        var publisher=$("<td></td>").append(books[i].publisher);
+       /* var publisher=$("<td></td>").append(books[i].publisher);
         var inNumber=$("<td></td>").append(books[i].inNumber);
-        var outPrice=$("<td></td>").append(books[i].outPrice);
+        var outPrice=$("<td></td>").append(books[i].outPrice);*/
+        var state=$("<td></td>").append(books[i].state);
+        var borrower=$("<td></td>").append(books[i].borrower);
         var update=$("<button></button>").append("修改").attr("onclick","update("+books[i].id+")")
             .addClass("btn btn-outline-primary").attr("type","button");
         var del=$("<button></button>").append("删除").attr("onclick","del("+books[i].id+")")
             .addClass("btn btn-outline-danger").attr("type","button");
-        var but=$("<td></td>").append(update).append(" ").append(del);
+        var look=$('<button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">查看</button>')
+            .attr("onclick","see("+books[i].id+")");
+        var but=$("<td></td>").append(update).append(" ").append(del).append(" ").append(look);
+
         tr.append(id).append(book_name).append(isbn).append(type).append(author).append(outDate)
-            .append(publisher).append(inNumber).append(outPrice).append(but);
+            .append(state).append(borrower).append(but);
         tr.appendTo("#Tbody")
     }
     $("#table").addClass("table table-hover")
-    if($.cookie("searchName")!=null){
-       $.cookie("searchName",null);
-    }else if($.cookie("bookType")!=null){
-        $.cookie("bookType",null);
-    }else if($.cookie("isbn")!=null){
-        $.cookie("isbn",null);
-    }
+}
+//TODO 修改、删除、查看
+function update(id){
+    $.cookie('updateBookId', id, {  path: '/' });
+    window.location.href="update";
+}
+function del(id){
+    $.ajax({
+        url:"/del",
+        type: "GET",
+        handlers: {},
+        data: {id:id},
+        success:function (result){
+            getSearchName();
+        }
+    });
+}
+function see(id){
+    $.ajax({
+        url:"/updateById",
+        type:"GET",
+        handlers:{},
+        data:{id:id},
+        success:function (result){
+            see_details(result.extend.books);
+        }
+    });
+}
+function see_details(books){
+    const isbn =$("#isbn").attr("value",books.isbn);
+    const cip =$("#cip").attr("value",books.cip);
+    const publisher =$("#publisher").attr("value",books.publisher);
+    const out_price = $("#out_price").attr("value",books.outPrice);
 }

@@ -45,4 +45,8 @@ public class Books {
     double intPrice;
     @TableField("out_price")
     double outPrice;
+    @TableField("state")
+    String state;
+    @TableField("borrower")
+    String borrower;
 }

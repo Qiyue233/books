@@ -10,8 +10,8 @@ public interface BooksService extends IService<Books> {
 
     public Msg putBook(String isbn,String cip,int type
             ,String name,String content,String author
-            ,String out_date,int entire_number
-            ,double int_price,double set_price);
+            ,String out_date,double int_price,double set_price
+            ,String state );
 
     public Msg getBookById(int id);
     public Msg getBookByName(String book_name);

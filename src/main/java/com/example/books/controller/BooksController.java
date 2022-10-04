@@ -43,11 +43,12 @@ public class BooksController {
     @PostMapping("/putBook")
     public Msg putBook(String isbn,String cip,int type
             ,String book_name,String content,String author
-            ,String out_date,int entire_number
-            ,double int_price,double set_price){
+            ,String out_date,double int_price,double set_price
+            ,String state ){
+
 
         return booksService.putBook(isbn,cip,type,book_name,content,
-                author,out_date,entire_number,int_price,set_price);
+                author,out_date,int_price,set_price,state);
 
     }
     //修改时根据id获取书籍信息
