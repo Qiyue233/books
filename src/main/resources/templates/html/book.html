@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ch" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>图书管理系统</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{css/book.css}">
+</head>
+<body style="overflow-x: hidden">
+<!--导航栏替换-->
+<div th:replace="~{commons/commons :: topbar(active='books.html')}"></div>
+<div class="row" style="height: 700px">
+    <div class="col-8" style="border-right: #dde1e5 solid 1px">
+        <div class="row" id="inputGroup">
+            <div class="col-2">
+                <select id="typeSelect">
+                    <option selected>类型</option>
+                    <option value="1">类型1</option>
+                    <option value="2">类型2</option>
+                    <option value="3">类型3</option>
+                </select>
+            </div>
+
+            <div class="col-5 offset-5">
+                <!--start 输入组-->
+                <div class="input-group mb-3" id="inputRight">
+                    <select id="inputSelect" style="width: 25%">
+                        <option selected>筛选</option>
+                        <option value="1">类型1</option>
+                        <option value="2">类型2</option>
+                        <option value="3">类型3</option>
+                    </select>
+                    <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">搜索</button>
+                    </div>
+                </div>
+                <!--end 输入值结束-->
+            </div>
+
+        </div>
+        <div class="row" style="height: 80%">
+            <div class="col" id="form">
+                <table id="table" class="table table-hover">
+                    <thead>
+                    <th>#</th>
+                    <th>序号</th>
+                    <th>书名</th>
+                    <th>ISBN</th>
+                    <th>类型</th>
+                    <th>内容</th>
+                    <th>发行时间</th>
+                    <th>馆存</th>
+                    <th>馆外</th>
+                    </thead>
+                    <tbody id="Tbody"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row" style="height: 9%">
+
+            <div class="col-2">
+                <div class="form-check" style="margin-left: 15%">
+                    <input type="checkbox" class="form-check-input" id="dropdownCheck2">
+                    <label class="form-check-label" for="dropdownCheck2">
+                        本页全选
+                    </label>
+                </div>
+            </div>
+
+            <!--start分页条-->
+            <div class="col-4 offset-2">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </div>
+            <!--end分页条结束-->
+
+            <div class="col-2 offset-2">
+                <button type="button" class="btn btn-danger">删除</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-4">
+
+    </div>
+</div>
+
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script th:src="@{js/book.js}"></script>
+</body>
+</html>

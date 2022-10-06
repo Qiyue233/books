@@ -17,9 +17,14 @@ public class StaticController {
     public String gotoRegister(){
         return "register";
     }
+
     @GetMapping("/books")
     public String books(){
         return "/admin/books";
+    }
+    @GetMapping("/book")
+    public String gotoBook(){
+        return "/html/book";
     }
     @GetMapping("/putBook")
     public String putBook(){
