@@ -1,0 +1,28 @@
+nav {
+    font-size: 1.5rem;
+    background-color: #21D4FD;
+    background-image: -webkit-linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
+    background-image: -moz-linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
+    background-image: -o-linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
+    background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
+}
+
+h1 {
+    font-size: 2rem;
+    color: white;
+}
+
+li {
+    margin: 10px 20px;
+}
+#inputBookName{
+    margin-left: 4%;
+    margin-top: 5%;
+    width: 90%;
+}
+.inputT{
+    margin-left: 3%;
+    text-align: left;
+    line-height: 250%;
+    margin-top: 3%;
+}

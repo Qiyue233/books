@@ -22,8 +22,8 @@ public interface BooksMapper extends BaseMapper<Books> {
     @Insert("INSERT INTO BookManagement.books (isbn, cip, type, book_name, content, author, out_date, set_price, int_price, state) " +
             "values (#{isbn},#{cip},#{type},#{book_name},#{content},#{author},#{out_date},#{set_price},#{int_price},#{state})")
     void  insert(@Param("isbn") String isbn,@Param("cip") String cip,@Param("type") int type
-            ,@Param("book_name") String book_name,@Param("content") String content,@Param("author") String author
-            ,@Param("out_date") String out_date,@Param("set_price") double set_price,@Param("int_price")double int_price
+            ,@Param("book_name") String book_name,@Param("author") String author
+            ,@Param("set_price") double set_price,@Param("int_price")double int_price
             ,@Param("state") String state);
 
     @Update("update BookManagement.books set  content=#{content}, in_number=#{in_number}, out_price=#{out_price}, int_price=#{int_price} where isbn=#{isbn}")

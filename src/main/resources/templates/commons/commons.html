@@ -29,6 +29,10 @@
             <a th:class="${active=='ownRecord.html'? 'nav-link active' : 'nav-link'}"
                th:href="@{/ownRecord}">借阅记录</a>
         </li>
+        <li class="nav-item">
+            <a th:class="${active=='addbook.html'? 'nav-link active' : 'nav-link'}"
+               th:href="@{/ownRecord}">录入书籍</a>
+        </li>
     </ul>
 
     <!--<ul class="navbar-nav" shiro:hasPermission="user">

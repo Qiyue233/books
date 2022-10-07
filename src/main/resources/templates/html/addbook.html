@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ch" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>图书管理系统</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{css/addbook.css}">
+</head>
+<body style="overflow-x: hidden">
+<!--导航栏替换-->
+<div th:replace="~{commons/commons :: topbar(active='addbook.html')}"></div>
+<div class="row" style="height: 700px">
+    <div class="col-8" >
+
+        <div class="row input-group input-group-lg" id="inputBookName">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-lg">书名</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+        </div>
+
+        <div class="row inputT">
+            <div class="col-1">ISBN</div>
+            <div class="col-4">
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 offset-1">CIP</div>
+            <div class="col-4">
+                <input type="text" class="form-control">
+            </div>
+        </div>
+
+        <div class="row inputT">
+            <div class="col-1">作者</div>
+            <div class="col-4">
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 offset-1">定价</div>
+            <div class="col-4">
+                <input type="text" class="form-control">
+            </div>
+        </div>
+
+        <div class="row inputT">
+            <div class="col-1">采购价</div>
+            <div class="col-4">
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-1 offset-1">数量</div>
+            <div class="col-4">
+                <input type="text" class="form-control">
+            </div>
+        </div>
+
+    </div>
+    <div class="col-4" style="background-color: #20c997">
+        <div class="row"></div>
+        <div class="row"></div>
+    </div>
+</div>
+
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script th:src="@{js/addbook.js}"></script>
+</body>
+</html>

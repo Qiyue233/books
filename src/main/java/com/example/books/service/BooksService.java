@@ -9,8 +9,8 @@ import com.example.books.bean.Msg;
 public interface BooksService extends IService<Books> {
 
     public Msg putBook(String isbn,String cip,int type
-            ,String name,String content,String author
-            ,String out_date,double int_price,double set_price
+            ,String name,String author
+            ,double set_price,double int_price
             ,String state );
 
     public Msg getBookById(int id);

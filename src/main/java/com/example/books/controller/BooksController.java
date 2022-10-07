@@ -41,14 +41,12 @@ public class BooksController {
     }
     //添加书籍
     @PostMapping("/putBook")
-    public Msg putBook(String isbn,String cip,int type
-            ,String book_name,String content,String author
-            ,String out_date,double int_price,double set_price
-            ,String state ){
+    public Msg putBook(String isbn,String cip,int type,String book_name,
+                       String author,double set_price,double int_price,
+                       String state ){
 
-
-        return booksService.putBook(isbn,cip,type,book_name,content,
-                author,out_date,int_price,set_price,state);
+        return booksService.putBook(isbn,cip,type,book_name,
+                author,set_price,int_price,state);
 
     }
     //修改时根据id获取书籍信息

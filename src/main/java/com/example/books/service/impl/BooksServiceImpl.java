@@ -32,12 +32,12 @@ public class BooksServiceImpl extends ServiceImpl<BooksMapper, Books> implements
         return Msg.success().add("books",booksMapper.selectByIsbn(isbn));
     }
     @Override
-    public Msg putBook(String isbn, String cip, int type, String book_name, String content, String author, String out_date
-             , double int_price, double set_price,String state) {
+    public Msg putBook(String isbn, String cip, int type, String book_name, String author
+             , double set_price, double int_price,String state) {
         //TODO 检校
         System.out.println(state);
-        booksMapper.insert(isbn,cip,type,book_name,content,
-                author,out_date,set_price,int_price, state);
+        booksMapper.insert(isbn,cip,type,book_name,
+                author,set_price,int_price, state);
         return Msg.success();
     }
 

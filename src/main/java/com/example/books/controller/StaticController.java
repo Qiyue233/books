@@ -26,6 +26,10 @@ public class StaticController {
     public String gotoBook(){
         return "/html/book";
     }
+    @GetMapping("/addbook")
+    public String gotoAddBook(){
+        return "/html/addbook";
+    }
     @GetMapping("/putBook")
     public String putBook(){
         return "/admin/book_add";
