@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.books.bean.Books;
 import com.example.books.bean.Msg;
 
+import java.util.List;
 
 
 public interface BooksService extends IService<Books> {
@@ -23,4 +24,6 @@ public interface BooksService extends IService<Books> {
     public int countByName(String book_name);
     public int countByType(int type);
     public int countByIsbn(String isbn);
+
+
 }

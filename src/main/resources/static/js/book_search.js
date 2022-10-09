@@ -3,6 +3,7 @@ getSearchName();
 function getSearchName(){
     if($.cookie("searchName")!=null){
         const book_name= $.cookie("searchName");
+        alert(book_name);
         searchBooksByName(book_name);
     }else if($.cookie("bookType")!=null){
         const bookType= $.cookie("bookType");

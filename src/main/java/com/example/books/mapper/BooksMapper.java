@@ -39,4 +39,7 @@ public interface BooksMapper extends BaseMapper<Books> {
 
     @Select("SELECT COUNT(*) FROM BookManagement.books WHERE isbn=#{isbn}")
     int selectCountByIsbn(String isbn);
+
+
+
 }

@@ -15,6 +15,6 @@ public class BookType {
     int id;
     @TableField("type")
     String type;
-    @TableField("explain")
-    String explain;
+    @TableField("bz")
+    String bz;
 }

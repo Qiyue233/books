@@ -2,8 +2,14 @@ package com.example.books.controller;
 
 
 import com.example.books.annotation.JwtToken;
+import com.example.books.bean.BookType;
+import com.example.books.bean.Books;
 import com.example.books.bean.Msg;
+import com.example.books.mapper.BooksMapper;
+import com.example.books.service.BookTypeService;
 import com.example.books.service.BooksService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,12 +24,29 @@ public class BooksController {
 
     @Resource
     BooksService booksService;
-
+    @Resource
+    BookTypeService bookTypeService;
     //获取全部信息
     @GetMapping("/getAllBooks")
-    public Msg getAllBook(){
-        return Msg.success().add("books",booksService.list()).add("nums",booksService.count());
+    public Msg getAllBook(int pageNum){
+        PageHelper.startPage(pageNum,6);
+        List<Books> list= booksService.list();
+        //将查询到的数据封装到PageInfo
+        PageInfo<Books> pageInfo=new PageInfo<>(list);
+        return Msg.success().add("books",pageInfo).add("type",bookTypeService.list());
     }
+
+
+    @GetMapping("/getType")
+    public Msg getType(){
+        return  bookTypeService.getType().add("nums",bookTypeService.count());
+    }
+    //根据类别获取 对应类别的所有书籍信息
+    @GetMapping("getAllBooksByType")
+    public Msg getAllBooksByType(int type){
+        return Msg.success().add("books",bookTypeService.getAllBooksByType(type)).add("type",bookTypeService.list()).add("nums",booksService.countByType(type));
+    }
+
     //根据书名搜索
     @GetMapping("/getBooksByName")
     public Msg getBookByName(String book_name){
@@ -39,6 +62,7 @@ public class BooksController {
      public Msg getBooksByIsbn(String isbn){
         return booksService.getBookByIsbn(isbn).add("nums",booksService.countByIsbn(isbn));
     }
+
     //添加书籍
     @PostMapping("/putBook")
     public Msg putBook(String isbn,String cip,int type,String book_name,

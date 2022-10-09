@@ -18,6 +18,7 @@ public class BooksServiceImpl extends ServiceImpl<BooksMapper, Books> implements
     @Resource
     BooksMapper booksMapper;
 
+
     @Override
     public Msg getBookByName(String book_name) {
         return Msg.success().add("books",booksMapper.selectByName(book_name));
@@ -40,6 +41,9 @@ public class BooksServiceImpl extends ServiceImpl<BooksMapper, Books> implements
                 author,set_price,int_price, state);
         return Msg.success();
     }
+
+
+
 
     @Override
     public Msg getBookById(int id) {
@@ -73,6 +77,8 @@ public class BooksServiceImpl extends ServiceImpl<BooksMapper, Books> implements
     public int countByIsbn(String isbn) {
         return booksMapper.selectCountByIsbn(isbn);
     }
+
+
 
 
 }

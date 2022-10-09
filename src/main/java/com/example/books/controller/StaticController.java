@@ -40,7 +40,7 @@ public class StaticController {
     }
     @GetMapping("searchBook")
     public String searchBook(){
-        return "/admin/book_search_result.html";
+        return "/admin/book_search_result";
     }
     @GetMapping("/readers")
     public String readers(){

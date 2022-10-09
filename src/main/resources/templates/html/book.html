@@ -5,6 +5,12 @@
     <title>图书管理系统</title>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{css/book.css}">
+    <style>
+        li{
+            float: left
+        }
+
+    </style>
 </head>
 <body style="overflow-x: hidden">
 <!--导航栏替换-->
@@ -13,31 +19,30 @@
     <div class="col-8" style="border-right: #dde1e5 solid 1px">
         <div class="row" id="inputGroup">
             <div class="col-2">
-                <select id="typeSelect">
+                <select id="typeSelect" onchange="selectType()">
                     <option selected>类型</option>
-                    <option value="1">类型1</option>
-                    <option value="2">类型2</option>
-                    <option value="3">类型3</option>
+                    <option value="2"></option>
+                    <option value="3"></option>
+                    <option value="4"></option>
                 </select>
             </div>
 
             <div class="col-5 offset-5">
                 <!--start 输入组-->
                 <div class="input-group mb-3" id="inputRight">
-                    <select id="inputSelect" style="width: 25%">
+                    <select id="inputSelect" style="width: 25%" onchange="selectTypeRight()">
                         <option selected>筛选</option>
-                        <option value="1">类型1</option>
-                        <option value="2">类型2</option>
-                        <option value="3">类型3</option>
+                        <option value="1">按照书名查询</option>
+                        <option value="2">按照类别查询</option>
+                        <option value="3">按照ISBN查询</option>
                     </select>
-                    <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                    <input type="text" class="form-control" aria-label="Text input with dropdown button" id="keyword">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">搜索</button>
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="getSelectTypeAndName()">搜索</button>
                     </div>
                 </div>
                 <!--end 输入值结束-->
             </div>
-
         </div>
         <div class="row" style="height: 80%">
             <div class="col" id="form">
@@ -48,7 +53,6 @@
                     <th>书名</th>
                     <th>ISBN</th>
                     <th>类型</th>
-                    <th>内容</th>
                     <th>发行时间</th>
                     <th>馆存</th>
                     <th>馆外</th>
@@ -68,18 +72,19 @@
                 </div>
             </div>
 
-            <!--start分页条-->
-            <div class="col-4 offset-2">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link">Previous</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
+            <!--start分页条 -->
+            <div class="col-4 offset-2 ">
+                <ul class="pagination justify-content-center"  >
+                   <!-- <li class="page-item " >
+                        <button class="page-link" onclick="prePage()">上一页</button>
+                    </li>-->
+                    <div id="body" ></div>
+                    <!--<li class="page-item"><button class="page-link" id="left"   value="1" onclick="">1</button></li>
+                    <li class="page-item"><button class="page-link" id="center" value="2" onclick="PageJump()">2</button></li>
+                    <li class="page-item"><button class="page-link" id="right"  value="3" onclick="">3</button></li>-->
+                   <!-- <li class="page-item">
+                        <button class="page-link" onclick="nextPage()">下一页</button>
+                    </li>-->
                 </ul>
             </div>
             <!--end分页条结束-->

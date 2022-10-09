@@ -27,8 +27,6 @@ public class Books {
     int type;
     @TableField("book_name")
     String bookName;
-    @TableField("content")
-    String content;
     @TableField("author")
     String author;
     @TableField("out_date")
@@ -43,10 +41,6 @@ public class Books {
     double setPrice;
     @TableField("int_price")
     double intPrice;
-    @TableField("out_price")
-    double outPrice;
     @TableField("state")
     String state;
-    @TableField("borrower")
-    String borrower;
 }
