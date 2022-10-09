@@ -84,4 +84,10 @@ public class LoginServiceImpl implements LoginService {
 
         return Msg.success().add("token",jwt);
     }
+
+    @Override
+    public Msg getUserInfo(String telNumber) {
+        User user=userMapper.selectByTel(telNumber);
+        return Msg.success().add("name",user.getUserName());
+    }
 }

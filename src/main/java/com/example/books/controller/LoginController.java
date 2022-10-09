@@ -23,12 +23,12 @@ public class LoginController {
     @Resource
     LoginService loginService;
     @GetMapping("/key")
-    public Msg Key(String telNumber){
+    public Msg getKey(String telNumber){
         if (!telNumber.matches(FINAL.TELPAT)){
             return Msg.fail("用户名格式错误");
         }
         return loginService.getKey(telNumber);
-    }
+}
     @GetMapping("/record")
     public Msg record(String telNumber,String password){
         String privateKey= (String) redisTemplate.opsForValue().getAndDelete(telNumber);
@@ -36,7 +36,7 @@ public class LoginController {
             password= RSAUtil.privateDecrypt(password, privateKey);
         }catch (Exception e){}
         if (!telNumber.matches(FINAL.TELPAT)){
-            return Msg.fail("用户名格式错误");
+            return Msg.fail("账号格式错误");
         }else if (!password.matches(FINAL.PASSPAT)){
             return Msg.fail("密码格式错误");
         }
@@ -58,5 +58,13 @@ public class LoginController {
             return Msg.fail("用户名格式错误");
         }
         return loginService.register(username,password,telNumber);
+    }
+
+    @GetMapping("/getUserInfo")
+    public Msg getUserInfo(String telNumber){
+        if (!telNumber.matches(FINAL.TELPAT)){
+            return Msg.fail("请不要抽取接口");
+        }
+        return loginService.getUserInfo(telNumber);
     }
 }

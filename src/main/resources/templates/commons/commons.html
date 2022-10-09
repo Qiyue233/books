@@ -34,25 +34,9 @@
                th:href="@{/ownRecord}">录入书籍</a>
         </li>
     </ul>
-
-    <!--<ul class="navbar-nav" shiro:hasPermission="user">
-        <li>
-            <a th:class="${active=='index.html'? 'nav-link active' : 'nav-link'}"
-            th:href="@{/index}">图书管理系统</a>
-        </li>-->
-     <!--   <li class="nav-item">
-            <a th:class="${active=='books.html'? 'nav-link active' : 'nav-link'}"
-               th:href="@{/reader/book/books}">图书信息</a>
-        </li>
-
-
-    </ul>-->
     <div class="text-white" style="font-size: medium; position: absolute; bottom: 30px; right: 40px">
         <div class="dropdown">
-            <a class="dropdown-toggle"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-               aria-expanded="false"
-               th:text="'您好--'+${session.LoginUserName}">
-            </a>
+            <a class="dropdown-toggle"  id="userName" data-toggle="dropdown" aria-expanded="false">未登录</a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" th:href="@{'/reader/info/toReaderInfo/' + ${LoginUserName}}"
                    shiro:hasPermission="user">个人信息</a>
@@ -62,6 +46,7 @@
             </div>
         </div>
     </div>
+
 </nav>
 
 </body>
