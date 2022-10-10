@@ -159,8 +159,9 @@ function getSelectTypeAndName(){
 function showBooKs(bookType,nums,books) {
     $("#Tbody").empty();
     for (var i = 0; i < nums; i++) {
-        var tr = $("<tr></tr>");
-        var select=$('<td></td>').append($('<input type="checkbox" class="form-check-input" style="margin-left: 0px">'));
+        var tr = $("<tr></tr>").attr("onclick","check("+books[i].id+")");
+        var select=$('<td></td>').append($('<input type="checkbox" id="checkbox" class="form-check-input" style="margin-left: 0px">'))
+            .attr("onclick","ckClick("+nums+")").attr("value","books[i].id");
         var id = $("<td></td>").append(i + 1);
         var bookName = $("<td></td>").append(books[i].bookName);
         var isbn = $("<td></td>").append(books[i].isbn);
@@ -192,12 +193,55 @@ function getAllBook(pageNum){
         }
     })
 }
+
+//获取选中书籍信息然后回显
+function check(id){
+    $.ajax({
+        url:"/checkById",
+        type:"GET",
+        handlers:{},
+        data:{id,id},
+        success:function (result){
+            showBookRight(result.extend.books.list)
+        }
+    });
+}
+//TODO 在右侧显示书籍信息
+function showBookRight(){
+
+
+}
+//判断选中的书籍数量是否是当前页面的所有
+function ckClick(nums){
+    //当前页面总个数
+    var len=nums;
+    //取得所有被选中的复选框的个数
+    var length=$("#checkbox:checked").length;
+    if(len == length){
+        $("#allCheck").prop("checked",true);
+    }else
+    {
+        $("#allCheck").prop("checked",false);
+    }
+}
+//选中全部
+function allCheck(){
+    var ischeck=$("#allCheck").prop("checked");
+    $("#Tbody input:checkbox").prop("checked",ischeck);
+
+}
+
 //删改查
 function update(id){
     $.cookie('updateBookId', id, {  path: '/' });
     window.location.href="update";
 }
-function del(id){
+//TODO 删除
+function del(){
+
+
+}
+function delById(id){
     $.ajax({
         url:"/del",
         type: "GET",

@@ -36,7 +36,7 @@ public class BooksController {
         return Msg.success().add("books",pageInfo).add("type",bookTypeService.list());
     }
 
-
+    //获取所有书籍类别信息
     @GetMapping("/getType")
     public Msg getType(){
         return  bookTypeService.getType().add("nums",bookTypeService.count());
@@ -45,6 +45,12 @@ public class BooksController {
     @GetMapping("getAllBooksByType")
     public Msg getAllBooksByType(int type){
         return Msg.success().add("books",bookTypeService.getAllBooksByType(type)).add("type",bookTypeService.list()).add("nums",booksService.countByType(type));
+    }
+
+    //选中根据id获取信息
+    @GetMapping("/checkById")
+    public Msg checkById( int id){
+        return booksService.getBookById(id);
     }
 
     //根据书名搜索
