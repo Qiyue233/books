@@ -24,51 +24,6 @@ public class BooksController {
 
     @Resource
     BooksService booksService;
-    @Resource
-    BookTypeService bookTypeService;
-    //获取全部信息
-    @GetMapping("/getAllBooks")
-    public Msg getAllBook(int pageNum){
-        PageHelper.startPage(pageNum,6);
-        List<Books> list= booksService.list();
-        //将查询到的数据封装到PageInfo
-        PageInfo<Books> pageInfo=new PageInfo<>(list);
-        return Msg.success().add("books",pageInfo).add("type",bookTypeService.list());
-    }
-
-    //获取所有书籍类别信息
-    @GetMapping("/getType")
-    public Msg getType(){
-        return  bookTypeService.getType().add("nums",bookTypeService.count());
-    }
-    //根据类别获取 对应类别的所有书籍信息
-    @GetMapping("getAllBooksByType")
-    public Msg getAllBooksByType(int type){
-        return Msg.success().add("books",bookTypeService.getAllBooksByType(type)).add("type",bookTypeService.list()).add("nums",booksService.countByType(type));
-    }
-
-    //选中根据id获取信息
-    @GetMapping("/checkById")
-    public Msg checkById( int id){
-        return booksService.getBookById(id);
-    }
-
-    //根据书名搜索
-    @GetMapping("/getBooksByName")
-    public Msg getBookByName(String book_name){
-        return booksService.getBookByName(book_name).add("nums",booksService.countByName(book_name));
-    }
-    //根据类型搜索
-     @GetMapping("/getBooksByType")
-     public Msg getBooksByType(int type){
-         return booksService.getBookByType(type).add("nums",booksService.countByType(type));
-    }
-    //根据isbn搜索
-     @GetMapping("/getBooksByIsbn")
-     public Msg getBooksByIsbn(String isbn){
-        return booksService.getBookByIsbn(isbn).add("nums",booksService.countByIsbn(isbn));
-    }
-
     //添加书籍
     @PostMapping("/putBook")
     public Msg putBook(String isbn,String cip,int type,String book_name,

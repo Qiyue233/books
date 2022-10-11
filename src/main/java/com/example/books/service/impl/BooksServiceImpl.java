@@ -1,17 +1,13 @@
 package com.example.books.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.books.bean.Books;
 import com.example.books.bean.Msg;
 import com.example.books.mapper.BooksMapper;
 import com.example.books.service.BooksService;
 import org.springframework.stereotype.Service;
-import org.yaml.snakeyaml.util.EnumUtils;
 
 import javax.annotation.Resource;
-import java.awt.print.Book;
-import java.util.List;
 
 @Service
 public class BooksServiceImpl extends ServiceImpl<BooksMapper, Books> implements BooksService {
@@ -19,19 +15,6 @@ public class BooksServiceImpl extends ServiceImpl<BooksMapper, Books> implements
     BooksMapper booksMapper;
 
 
-    @Override
-    public Msg getBookByName(String book_name) {
-        return Msg.success().add("books",booksMapper.selectByName(book_name));
-    }
-
-    @Override
-    public Msg getBookByType(int type) {
-        return  Msg.success().add("books",booksMapper.selectByType(type));
-    }
-    @Override
-    public Msg getBookByIsbn(String isbn) {
-        return Msg.success().add("books",booksMapper.selectByIsbn(isbn));
-    }
     @Override
     public Msg putBook(String isbn, String cip, int type, String book_name, String author
              , double set_price, double int_price,String state) {
@@ -48,7 +31,7 @@ public class BooksServiceImpl extends ServiceImpl<BooksMapper, Books> implements
     @Override
     public Msg getBookById(int id) {
       /*  System.out.println("------------->"+id);*/
-        return Msg.success().add("books",booksMapper.selectById(id));
+        return Msg.success();
     }
 
     @Override
@@ -63,20 +46,6 @@ public class BooksServiceImpl extends ServiceImpl<BooksMapper, Books> implements
         return  Msg.success();
     }
 
-    @Override
-    public int countByName(String book_name) {
-        return  booksMapper.selectCountByName(book_name);
-    }
-
-    @Override
-    public int countByType(int type) {
-        return booksMapper.selectCountByType(type);
-    }
-
-    @Override
-    public int countByIsbn(String isbn) {
-        return booksMapper.selectCountByIsbn(isbn);
-    }
 
 
 
