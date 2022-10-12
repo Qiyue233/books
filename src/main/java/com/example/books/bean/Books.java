@@ -39,8 +39,6 @@ public class Books {
     int inNumber;
     @TableField("set_price")
     double setPrice;
-    @TableField("int_price")
-    double intPrice;
     @TableField("state")
     String state;
 }

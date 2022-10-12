@@ -4,32 +4,20 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.books.bean.Books;
 import org.apache.ibatis.annotations.*;
 
+import java.sql.Date;
 import java.util.List;
 
 
 @Mapper
 public interface BooksMapper extends BaseMapper<Books> {
 
-    @Select("SELECT * from books where book_name= #{book_name} ;")
-    List<Books> selectByName(@Param("book_name") String book_name);
+    @Insert("INSERT INTO BookManagement.books (isbn, cip, type, book_name, author, out_date, publisher,in_number, set_price) " +
+            "values (#{isbn},#{cip},#{type},#{book_name},#{author},#{out_date},#{publisher},#{number},#{set_price}")
+    void  insert(@Param("isbn") String isbn, @Param("cip") String cip, @Param("type") int type
+            , @Param("book_name") String book_name, @Param("author") String author
+            , @Param("publisher") String publisher,@Param("outDate")Date outDate
+            , @Param("set_price") double set_price, @Param("number") int number);
 
-    @Select("SELECT * from books where id= #{id} ;")
-    Books selectBookById(@Param("id") int id);
-    @Select("SELECT * FROM BookManagement.books WHERE type=#{type}")
-    List<Books> selectByType(int type);
-    @Select("SELECT * from books where isbn= #{isbn} ;")
-    List<Books> selectByIsbn(String isbn);
-    @Insert("INSERT INTO BookManagement.books (isbn, cip, type, book_name, content, author, out_date, set_price, int_price, state) " +
-            "values (#{isbn},#{cip},#{type},#{book_name},#{content},#{author},#{out_date},#{set_price},#{int_price},#{state})")
-    void  insert(@Param("isbn") String isbn,@Param("cip") String cip,@Param("type") int type
-            ,@Param("book_name") String book_name,@Param("author") String author
-            ,@Param("set_price") double set_price,@Param("int_price")double int_price
-            ,@Param("state") String state);
-
-    @Update("update BookManagement.books set  content=#{content}, in_number=#{in_number}, out_price=#{out_price}, int_price=#{int_price} where isbn=#{isbn}")
-    void update(@Param("content") String content,@Param("in_number") int in_number
-            ,@Param("out_price") double out_price,@Param("int_price")double int_price
-            ,@Param("isbn") String isbn);
 
     @Select("SELECT COUNT(*) FROM BookManagement.books WHERE book_name=#{book_name}")
     int selectCountByName(String book_name);
@@ -37,9 +25,12 @@ public interface BooksMapper extends BaseMapper<Books> {
     @Select("SELECT COUNT(*) FROM BookManagement.books WHERE type=#{type}")
     int selectCountByType(int type);
 
-    @Select("SELECT COUNT(*) FROM BookManagement.books WHERE isbn=#{isbn}")
+    @Select("SELECT COUNT(*) FROM BookManagement.books WHERE isbn=#{isbn};")
     int selectCountByIsbn(String isbn);
 
+    @Select("select isbn from books;")
+    List<String> selectIsbn();
 
-
+    @Insert("update books set in_number=in_number+ #{#number} where isbn = #{#isbn};")
+    void update(@Param("number")int number,@Param("isbn")String isbn);
 }

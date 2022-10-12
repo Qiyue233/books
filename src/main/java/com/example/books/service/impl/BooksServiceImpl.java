@@ -14,29 +14,13 @@ public class BooksServiceImpl extends ServiceImpl<BooksMapper, Books> implements
     @Resource
     BooksMapper booksMapper;
 
-
-    @Override
-    public Msg putBook(String isbn, String cip, int type, String book_name, String author
-             , double set_price, double int_price,String state) {
-        //TODO 检校
-        System.out.println(state);
-        booksMapper.insert(isbn,cip,type,book_name,
-                author,set_price,int_price, state);
-        return Msg.success();
-    }
-
-
-
-
     @Override
     public Msg getBookById(int id) {
-      /*  System.out.println("------------->"+id);*/
         return Msg.success();
     }
 
     @Override
     public Msg update(String content, int in_number,double out_price,double int_price,String isbn) {
-        booksMapper.update(content, in_number, out_price, int_price,isbn);
         return Msg.success();
     }
 
