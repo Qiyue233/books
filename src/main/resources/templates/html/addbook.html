@@ -11,65 +11,66 @@
 <div th:replace="~{commons/commons :: topbar(active='addbook.html')}"></div>
 <div class="row" style="height: 700px">
     <div class="col-8" >
-
         <div class="row input-group input-group-lg" id="inputBookName">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-lg">书名</span>
             </div>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+            <input type="text" id="bookName" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
         </div>
-
         <div class="row inputT">
             <div class="col-1">ISBN</div>
             <div class="col-4">
-                <input type="text" class="form-control">
+                <input type="text" id="isbn" class="form-control">
             </div>
             <div class="col-1 offset-1">CIP</div>
             <div class="col-4">
-                <input type="text" class="form-control">
+                <input type="text" id="cip" class="form-control">
             </div>
         </div>
-
         <div class="row inputT">
             <div class="col-1">作者</div>
             <div class="col-4">
-                <input type="text" class="form-control">
+                <input type="text" id="author" class="form-control">
             </div>
             <div class="col-2 offset-1">发行日期</div>
             <div class="col-3">
-                <input type="text" class="form-control">
+                <input type="text" id="outDate" class="form-control">
             </div>
         </div>
-
         <div class="row inputT">
             <div class="col-1">出版社</div>
             <div class="col-4">
-                <input type="text" class="form-control">
+                <input type="text" id="publisher" class="form-control">
             </div>
             <div class="col-1 offset-1">类型</div>
             <div class="col-4">
-                <input type="text" class="form-control">
+                <select id="typeSelect" style="width: 340px;height: 40px" class="form-control"  >
+                    <option selected>类型</option>
+                    <option value="2"></option>
+                    <option value="3"></option>
+                    <option value="4"></option>
+                </select>
             </div>
         </div>
-
         <div class="row inputT">
             <div class="col-1">定价</div>
             <div class="col-4">
-                <input type="text" class="form-control">
+                <input type="text" id="setPrice" class="form-control">
             </div>
             <div class="col-1 offset-1">采购价</div>
             <div class="col-4">
-                <input type="text" class="form-control">
+                <input type="text" id="inputPrice" class="form-control">
             </div>
         </div>
-
         <div class="row inputT">
             <div class="col-1">数量</div>
             <div class="col-4">
-                <input type="text" class="form-control">
+                <input type="text" id="inNumber" class="form-control">
             </div>
         </div>
-
+        <div class="row">
+            <button id="add"  onclick="add()">添加</button>
+        </div>
     </div>
     <div class="col-4" style="background-color: #20c997">
         <div class="row"></div>

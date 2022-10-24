@@ -33,8 +33,8 @@ public class Books {
     Date outDate;
     @TableField("publisher")
     String publisher;
-    @TableField("entire_number")
-    int entireNumber;
+    @TableField("out_number")
+    int outNumber;
     @TableField("in_number")
     int inNumber;
     @TableField("set_price")

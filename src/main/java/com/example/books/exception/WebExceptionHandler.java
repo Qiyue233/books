@@ -19,7 +19,7 @@ public class WebExceptionHandler {
 
     @ExceptionHandler(value = WebException.class)
     public Msg webException(WebException e){
-        return Msg.fail(e.getErrorMsg());
+        return new Msg(303,e.getErrorMsg());
     }
 
     @ExceptionHandler(value =NumberFormatException.class)

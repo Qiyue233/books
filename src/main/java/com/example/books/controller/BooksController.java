@@ -26,17 +26,21 @@ public class BooksController {
     BooksService booksService;
     //修改时根据id获取书籍信息
     @GetMapping("/updateById")
+    @JwtToken
     public Msg updateById( int id){
         return booksService.getBookById(id);
     }
     //进行修改
     @PostMapping("/updateAjax")
-    public Msg update( String content, int in_number,double out_price,double int_price,String isbn){
-        return booksService.update(content, in_number, out_price, int_price,isbn);
+    @JwtToken
+    public Msg update( int inNumber,int outNumber,double setPrice,String isbn){
+
+        return booksService.update(inNumber,outNumber , setPrice,isbn);
     }
     //根据id删除
     @GetMapping("/del")
-    public Msg del(int id){
+    @JwtToken
+    public Msg del(int[] id){
         return booksService.del(id);
     }
 

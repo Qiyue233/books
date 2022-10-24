@@ -1,5 +1,6 @@
 package com.example.books.controller;
 
+import com.example.books.annotation.JwtToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -13,11 +14,11 @@ public class StaticController {
     public String gotoIndex(){
         return "index";
     }
+
     @GetMapping("/register")
     public String gotoRegister(){
         return "register";
     }
-
     @GetMapping("/books")
     public String books(){
         return "/admin/books";

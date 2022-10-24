@@ -8,7 +8,7 @@ import com.example.books.bean.Msg;
 public interface BookTypeService extends IService<BookType> {
     public Msg getType();
 
-    Msg getAllBooksByType(int type);
+/*    Msg getAllBooksByType(int type);*/
 
     Msg getTypeById(int id);
 }

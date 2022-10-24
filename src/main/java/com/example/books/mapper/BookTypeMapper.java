@@ -15,9 +15,9 @@ public interface BookTypeMapper extends BaseMapper<BookType> {
     @Select("SELECT * FROM BookManagement.book_Type")
     List<BookType> getType();
 
-    @Select("SELECT  *  FROM BookManagement.books where type=#{type}")
+   /* @Select("SELECT  *  FROM BookManagement.books where type=#{type}")
     List<Books> getAllBooksByType(@Param("type")  int type);
-
+*/
     @Select("SELECT * FROM BookManagement.book_Type where id=#{id}")
     BookType getTypeById(@Param("id")  int id);
 }

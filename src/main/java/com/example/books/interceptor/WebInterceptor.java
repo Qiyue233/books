@@ -11,6 +11,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
@@ -26,30 +27,46 @@ public class WebInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        // 从 http 请求头中取出 token
-        String token = request.getHeader("token");
         // 如果不是映射到方法直接通过
         if(!(handler instanceof HandlerMethod)){
             return true;
         }
+
+
         HandlerMethod handlerMethod=(HandlerMethod)handler;
         Method method=handlerMethod.getMethod();
         //检查有没有需要用户权限的注解
 
-        if (method.isAnnotationPresent(JwtToken.class)) {
-            JwtToken jwtToken = method.getAnnotation(JwtToken.class);
-            if (jwtToken.required()) {
-                // 执行认证
-                if (token == null) {
-                    throw new RuntimeException("无token，请重新登录");
-                };
-                String name = JWTUtil.getName(token);
-                String key= (String) redis.opsForValue().get(name+"-tokenKey");
-                if (key==null||!JWTUtil.verify(token,name,key)){
-                    throw new WebException("身份验证失败");
-                }
+        if (!method.isAnnotationPresent(JwtToken.class)) {
+            return true;
+        }
+
+        JwtToken jwtToken = method.getAnnotation(JwtToken.class);
+        // 从 http 请求头中取出 token
+        Cookie[] cookies=request.getCookies();
+        if (cookies==null){
+            throw new WebException("身份验证失败");
+        }
+        String token=null;
+        for (Cookie cookie:cookies){
+            if ("token".equals(cookie.getName())){
+                token=cookie.getValue();
+                break;
             }
         }
+
+        if (token == null) {
+            throw new WebException("身份验证失败");
+
+        }
+
+        String name = JWTUtil.getName(token);
+        String key= (String) redis.opsForValue().get(name+"-tokenKey");
+
+        if (key==null||!JWTUtil.verify(token,name,key)){
+            throw new WebException("身份验证失败");
+        }
+
         return true;
     }
 

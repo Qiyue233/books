@@ -1,5 +1,6 @@
 package com.example.books.controller;
 
+import com.example.books.annotation.JwtToken;
 import com.example.books.bean.Msg;
 import com.example.books.service.GetBookService;
 import org.springframework.stereotype.Controller;
@@ -10,46 +11,55 @@ import javax.annotation.Resource;
 
 @Controller
 @ResponseBody
+
 public class GetBookController {
     @Resource
     GetBookService getBookService;
 
     @GetMapping("/getAllBooks")
+    @JwtToken
     public Msg getAllBook(int pageNum){
         return getBookService.getAllBook(pageNum);
     }
     //获取所有书籍类别信息
     @GetMapping("/getType")
+    @JwtToken
     public Msg getType(){
         return  getBookService.getType();
     }
 
 
-    @GetMapping("getAllBooksByType")
-    public Msg getAllBooksByType(int type){
-        return getBookService.getAllBooksByType(type);
-    }
-
     //选中根据id获取信息
     @GetMapping("/checkById")
+    @JwtToken
     public Msg getBookById( int id){
         return getBookService.getBookById(id);
     }
 
     //根据书名搜索
     @GetMapping("/getBooksByName")
-    public Msg getBookByName(String book_name){
-        return getBookService.getBookByName(book_name);
+    @JwtToken
+    public Msg getBookByName(Integer pageNum,String book_name){
+        return getBookService.getBookByName(pageNum,book_name);
+    }
+    //把类型转换成对应的数字
+    @GetMapping("/getTypeByType")
+    @JwtToken
+    public Msg getTypeByType(String type){
+        return getBookService.getTypeByType(type);
     }
     //根据类型搜索
     @GetMapping("/getBooksByType")
-    public Msg getBooksByType(int type){
-        return getBookService.getBookByType(type);
+    @JwtToken
+    public Msg getBooksByType(Integer pageNum,Integer type){
+        return  getBookService.getBookByType(pageNum,type);
     }
+
     //根据isbn搜索
     @GetMapping("/getBooksByIsbn")
-    public Msg getBooksByIsbn(String isbn){
-        return getBookService.getBookByIsbn(isbn);
+    @JwtToken
+    public Msg getBooksByIsbn(Integer pageNum,String isbn){
+        return getBookService.getBookByIsbn(pageNum,isbn);
     }
 
 }

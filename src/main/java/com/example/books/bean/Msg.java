@@ -21,6 +21,11 @@ public class Msg {
     //用户返回给浏览器的信息
     private Map<String,Object> extend= new HashMap<>();
 
+    public Msg(int code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
+
     //成功返回
     public static Msg success(){
         Msg result=new Msg();

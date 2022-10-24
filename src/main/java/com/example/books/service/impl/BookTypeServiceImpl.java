@@ -20,10 +20,10 @@ public class BookTypeServiceImpl extends ServiceImpl<BookTypeMapper, BookType> i
         return Msg.success().add("type", bookTypeMapper.getType());
     }
 
-    @Override
+  /*  @Override
     public Msg getAllBooksByType(int type) {
         return Msg.success().add("type", bookTypeMapper.getAllBooksByType(type));
-    }
+    }*/
 
     @Override
     public Msg getTypeById(int id) {

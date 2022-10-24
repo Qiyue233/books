@@ -10,9 +10,9 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface BookLogMapper extends BaseMapper<BookLog> {
-    @Insert("INSERT INTO BookManagement.book_log (uid, isbn, name, set_price, price, number)" +
-            "VALUES (#{uid}, #{isbn}, #{name}, #{setPrice}, #{price}, #{number});")
+    @Insert("INSERT INTO BookManagement.book_log (uid, isbn, input_time, set_price, price, number)" +
+            "VALUES (#{uid}, #{isbn}, #{input_time}, #{setPrice}, #{price}, #{number});")
     void insert(@Param("uid") String uid,@Param("isbn") String isbn,
-                @Param("name") String name, @Param("setPrice") double setPrice,
+                @Param("input_time") String input_time, @Param("setPrice") double setPrice,
                 @Param("price") double price,@Param("number") double number);
 }

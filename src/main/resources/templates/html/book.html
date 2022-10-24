@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ch" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="ch" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:value="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>图书管理系统</title>
@@ -47,7 +48,7 @@
         <div class="row" style="height: 80%">
             <div class="col" id="form">
                 <table id="table" class="table table-hover">
-                    <thead>
+                    <thead style="font-size: 20px">
                     <th>#</th>
                     <th>序号</th>
                     <th>书名</th>
@@ -57,7 +58,7 @@
                     <th>馆存</th>
                     <th>馆外</th>
                     </thead>
-                    <tbody id="Tbody"></tbody>
+                    <tbody id="Tbody" style="font-size: 25px"></tbody>
                 </table>
             </div>
         </div>
@@ -90,12 +91,73 @@
             <!--end分页条结束-->
 
             <div class="col-2 offset-2">
-                <button type="button" class="btn btn-danger" onclick="del()">删除</button>
+                <!--<button type="button"  class="btn btn-danger" onclick="del()">删除</button>-->
+                <button type="button" id="delete" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" onclick="delAjax()">删除</button>
             </div>
 
         </div>
     </div>
     <div class="col-4">
+        <div id="rightBody"></div>
+        <div class="row">
+            <label for="bookName">
+                <input id="bookName" style="border: 0;font-size: 200%;margin-left:50%;color: black" readonly="readonly">
+            </label>
+        </div>
+        <div class="row" style="height: 80%">
+            <div class="row" style="margin-left: 10px;">
+                <label style="font-size: 150%" for="author">作者:
+                    <input id="author"  style="border: 0" value=""readonly="readonly">
+                </label>
+            </div>
+            <div class="row" style="margin-left: 10px;">
+                <label style="font-size: 150%" for="cip">CIP:
+                    <input style="border: 0" id="cip" value="" readonly="readonly">
+                </label>
+            </div>
+            <div class="row" style="margin-left: 10px;">
+                <label style="font-size: 150%" for="isbn">ISBN:
+                    <input style="border: 0" id="isbn" value="" readonly="readonly">
+                </label>
+            </div>
+            <div class="row" style="margin-left: 10px;">
+                <label style="font-size: 150%" for="type">类型:
+                    <input style="border: 0" id="type" value="" readonly="readonly">
+                </label>
+            </div>
+
+            <div class="row" style="margin-left: 10px;">
+                <label style="font-size: 150%" for="inNumber">馆存:
+                    <input  id="inNumber" value="">
+                </label>
+            </div>
+            <div class="row" style="margin-left: 10px;">
+                <label style="font-size: 150%" for="outNumber">馆外:
+                    <input  id="outNumber" value="">
+                </label>
+            </div>
+            <div class="row" style="margin-left: 10px;">
+                <label style="font-size: 150%" for="setPrice">定价:
+                    <input  id="setPrice" value="">
+                </label>
+            </div>
+            <div class="row" style="margin-left: 10px;">
+                <label style="font-size: 150%" for="outDate">发行时间:
+                    <input style="border: 0" id="outDate" value="" readonly="readonly">
+                </label>
+            </div>
+            <div class="row" style="margin-left: 10px;">
+                <label style="font-size: 150%" for="publisher">出版社:
+                    <input style="border: 0" id="publisher" value="" readonly="readonly">
+                </label>
+            </div>
+
+        </div>
+        <div class="row" style="height: 9%;margin-top: 12px">
+            <div class="col-2 " style="width:10px;margin-left: 70%;">
+                <input type="button"  class="btn btn-info"  style="margin-left: 1px" value="修改" onclick="update()">
+            </div>
+        </div>
 
     </div>
 </div>

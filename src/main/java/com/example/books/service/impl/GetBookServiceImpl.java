@@ -39,34 +39,57 @@ public class GetBookServiceImpl extends ServiceImpl<BooksMapper, Books> implemen
         return  bookTypeService.getType().add("nums",bookTypeService.count());
     }
 
-    @Override
+   /* @Override
     public Msg getAllBooksByType(int type) {
         return Msg.success().add("books",bookTypeService.getAllBooksByType(type))
                 .add("type",bookTypeService.list())
                 .add("nums",this.countByType(type));
-    }
+    }*/
 
     @Override
     public Msg getBookById(int id) {
-        return Msg.success().add("books",booksMapper.selectById(id));
+
+        return Msg.success().add("books",booksMapper.selectById(id)).add("type",bookTypeService.list());
     }
 
     @Override
-    public Msg getBookByName(String book_name) {
-        return Msg.success().add("nums",this.countByName(book_name));
+    public Msg getBookByName(Integer pageNum,String book_name) {
+        PageHelper.startPage(pageNum,1);
+        List<Books> list= booksMapper.selectByName(book_name);
+        //将查询到的数据封装到PageInfo
+        PageInfo<Books> pageInfo=new PageInfo<>(list);
+        return Msg.success().add("books",pageInfo).add("type",bookTypeService.list());
     }
 
     @Override
-    public Msg getBookByType(int type) {
-        return Msg.success().add("nums",this.countByType(type));
+    public Msg getBookByType(Integer pageNum,Integer type) {
+        System.out.println(type);
+        if (type==1){
+            PageHelper.startPage(pageNum,6);
+            List<Books> list=this.list();
+            //将查询到的数据封装到PageInfo
+            PageInfo<Books> pageInfo=new PageInfo<>(list);
+            return Msg.success().add("books",pageInfo).add("type",bookTypeService.list());
+        }else {
+            PageHelper.startPage(pageNum,6);
+            List<Books> list=booksMapper.selectByType(type);
+            //将查询到的数据封装到PageInfo
+            PageInfo<Books> pageInfo=new PageInfo<>(list);
+            return Msg.success().add("books",pageInfo).add("type",bookTypeService.list());
+        }
+
     }
 
     @Override
-    public Msg getBookByIsbn(String isbn) {
-        return Msg.success().add("nums",this.countByIsbn(isbn));
+    public Msg getBookByIsbn(Integer pageNum,String isbn) {
+        PageHelper.startPage(pageNum,6);
+        List<Books> list=booksMapper.selectByIsbn(isbn);
+        //将查询到的数据封装到PageInfo
+        PageInfo<Books> pageInfo=new PageInfo<>(list);
+        return Msg.success().add("books",pageInfo).add("type",bookTypeService.list());
     }
 
-    @Override
+ /*   @Override
     public int countByName(String book_name) {
         return booksMapper.selectCountByName(book_name);
     }
@@ -79,6 +102,11 @@ public class GetBookServiceImpl extends ServiceImpl<BooksMapper, Books> implemen
     @Override
     public int countByIsbn(String isbn) {
         return booksMapper.selectCountByIsbn(isbn);
+    }
+*/
+    @Override
+    public Msg getTypeByType(String type) {
+        return Msg.success().add("type",booksMapper.getTypeByType(type));
     }
 
 }

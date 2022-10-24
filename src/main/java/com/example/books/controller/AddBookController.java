@@ -21,6 +21,7 @@ public class AddBookController {
             , int type, double setPrice, double price,int number){
         //bookName,isbn,cip,author,setPrice,price,number用于日志
         //bookName,isbn,cip,author,setPrice,outDate,publisher,type,number用于入库
+        System.out.println(type);
         return addBookService.addBook(bookName,isbn,cip,author,setPrice,price,outDate,publisher,type,number);
     }
 }

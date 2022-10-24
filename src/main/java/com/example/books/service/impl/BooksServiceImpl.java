@@ -20,13 +20,20 @@ public class BooksServiceImpl extends ServiceImpl<BooksMapper, Books> implements
     }
 
     @Override
-    public Msg update(String content, int in_number,double out_price,double int_price,String isbn) {
+    public Msg update(int in_number,int out_number,double set_price,String isbn) {
+        booksMapper.updateByIsbn(in_number,out_number,set_price,isbn);
         return Msg.success();
     }
 
+
+
     @Override
-    public Msg del(int id) {
-        booksMapper.deleteById(id);
+    public Msg del(int[] id) {
+        for (int i=0;i<id.length;i++)
+        {
+            booksMapper.deleteById(id[i]);
+            System.out.println(id[i]);
+        }
         return  Msg.success();
     }
 

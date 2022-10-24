@@ -14,8 +14,8 @@
             <a th:class="${active=='index.html'? 'nav-link active' : 'nav-link'}" th:href="@{/index}">图书管理系统</a>
         </li>
         <li class="nav-item">
-            <a th:class="${active=='books.html'? 'nav-link active' : 'nav-link'}"
-              th:href="@{/books}">图书管理</a>
+            <a th:class="${active=='book.html'? 'nav-link active' : 'nav-link'}"
+              th:href="@{/book}">图书管理</a>
         </li>
         <li class="nav-item">
             <a th:class="${active=='readers.html'? 'nav-link active' : 'nav-link'}"
@@ -31,12 +31,12 @@
         </li>
         <li class="nav-item">
             <a th:class="${active=='addbook.html'? 'nav-link active' : 'nav-link'}"
-               th:href="@{/ownRecord}">录入书籍</a>
+               th:href="@{/addbook}">录入书籍</a>
         </li>
     </ul>
     <div class="text-white" style="font-size: medium; position: absolute; bottom: 30px; right: 40px">
         <div class="dropdown">
-            <a class="dropdown-toggle"  id="userName" data-toggle="dropdown" aria-expanded="false">未登录</a>
+            <a class="dropdown-toggle"  id="userName" value="未登录" data-toggle="dropdown" aria-expanded="false" ></a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" th:href="@{'/reader/info/toReaderInfo/' + ${LoginUserName}}"
                    shiro:hasPermission="user">个人信息</a>
