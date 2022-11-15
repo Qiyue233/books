@@ -1,4 +1,3 @@
-//批量借出
 var bookId=[];  //保存当前页面所有的书籍id
 var saveId=[];  //选中的书籍id
 var userName;
@@ -37,6 +36,8 @@ function getUserAjax(name){
     });
 }
 
+
+
 // 从当前页面中获取搜索方式
 function selectTypeRight(){
     const type=$("#inputSelect").val()
@@ -47,75 +48,93 @@ function getSelectTypeAndName(){
         //书名
         searchContext=$("#keyword").val();
         pageNum=1;
-        searchRecordByName(pageNum,searchContext)
+        searchBooksByName(pageNum,searchContext)
     }else if(searchType==2){
-        //借阅人
+        //类别
         searchContext=$("#keyword").val();
         pageNum=1;
-        searchRecordByUserName(pageNum,searchContext)
+        getTypeByType(searchContext)
     }else {
-        //练习电话
+        //书号(isbn)
         searchContext=$("#keyword").val();
         pageNum=1;
-        searchBooksByTel(1,searchContext)
+        searchBooksByIsbn(pageNum,searchContext)
     }
 
 }
-
-
-function searchRecordByName(pageNum,book_name){
+function getTypeByType(type){
     $.ajax({
-        url:"/searchRecordByName",
+        url:"/getTypeByType",
         type:"GET",
         handlers:{},
-        data:{pageNum:pageNum,bookName:book_name},
-        success:function (result){
-            if(result.code==200){
-                searchShow(result.extend.record.size,result.extend.record.list);
-                getPageNum(result.extend.record);
-                ShowPrePage(result.extend.record.prePage);
-                ShowNextPage(result.extend.record.nextPage);
-            }else if (result.code==303){
-                alert("莫的权限，请登录");
-                window.location.href="/";
-            }
-
-        }
-    });
-}
-function searchRecordByUserName(pageNum,userName){
-    alert(userName)
-    $.ajax({
-        url:"/searchRecordByUserName",
-        type:"GET",
-        handlers:{},
-        data:{pageNum:pageNum,userName:userName},
-        success:function (result){
-            if(result.code==200){
-                searchShow(result.extend.record.size,result.extend.record.list);
-                getPageNum(result.extend.record);
-                ShowPrePage(result.extend.record.prePage);
-                ShowNextPage(result.extend.record.nextPage);
-            }else if (result.code==303){
-                alert("莫的权限，请登录");
-                window.location.href="/";
-            }
-
-        }
-    });
-}
-function searchBooksByTel(pageNum,tel){
-    $.ajax({
-        url:"/searchBooksByTel",
-        type:"GET",
-        handlers:{},
-        data:{pageNum:pageNum,tel:tel},
+        data:{type:type},
         success:function (result){
             if (result.code==200){
-                searchShow(result.extend.record.size,result.extend.record.list);
-                getPageNum(result.extend.record);
-                ShowPrePage(result.extend.record.prePage);
-                ShowNextPage(result.extend.record.nextPage);
+                searchContext=result.extend.type;
+                searchBooksByType(1,result.extend.type)
+            }else if (result.code==303){
+                alert("莫的权限，请登录");
+                window.location.href="/";
+            }
+        }
+    });
+}
+
+function searchBooksByName(pageNum,book_name){
+    $.ajax({
+        url:"/getBooksByName",
+        type:"GET",
+        handlers:{},
+        data:{pageNum:pageNum,book_name:book_name},
+        success:function (result){
+            if(result.code==200){
+                searchShow(result.extend.type,result.extend.books.size,result.extend.books.list);
+                getPageNum(result.extend.books);
+                ShowPrePage(result.extend.books.prePage)
+                ShowNextPage(result.extend.books.nextPage)
+                showBookRight(result.extend.type,result.extend.books.list[0])
+            }else if (result.code==303){
+                alert("莫的权限，请登录");
+                window.location.href="/";
+            }
+
+        }
+    });
+}
+function searchBooksByType(pageNum,bookType){
+    $.ajax({
+        url:"/getBooksByType",
+        type:"GET",
+        handlers:{},
+        data:{pageNum:pageNum,type:bookType},
+        success:function (result){
+            if(result.code==200){
+                searchShow(result.extend.type,result.extend.books.size,result.extend.books.list);
+                getPageNum(result.extend.books);
+                ShowPrePage(result.extend.books.prePage)
+                ShowNextPage(result.extend.books.nextPage)
+                showBookRight(result.extend.type,result.extend.books.list[0])
+            }else if (result.code==303){
+                alert("莫的权限，请登录");
+                window.location.href="/";
+            }
+
+        }
+    });
+}
+function searchBooksByIsbn(pageNum,isbn){
+    $.ajax({
+        url:"/getBooksByIsbn",
+        type:"GET",
+        handlers:{},
+        data:{pageNum:pageNum,isbn:isbn},
+        success:function (result){
+            if (result.code==200){
+                searchShow(result.extend.type,result.extend.books.size,result.extend.books.list);
+                getPageNum(result.extend.books);
+                ShowPrePage(result.extend.books.prePage)
+                ShowNextPage(result.extend.books.nextPage)
+                showBookRight(result.extend.type,result.extend.books.list[0])
             }else if (result.code==303){
                 alert("莫的权限，请登录");
                 window.location.href="/";
@@ -127,17 +146,17 @@ function searchBooksByTel(pageNum,tel){
 //显示查询到的书籍
 function getAllBook(pageNum){
     $.ajax({
-        url:"/getAllBorrowRecords",
+        url:"/getAllBooks",
         type:"GET",
         handlers:{},
         data:{pageNum:pageNum},
         success:function (result){
             if(result.code==200){
-                searchShow(result.extend.record.size,result.extend.record.list);
-                getPageNum(result.extend.record);
-                ShowPrePage(result.extend.record.prePage)
-                ShowNextPage(result.extend.record.nextPage)
-            /*    showBookRight(result.extend.type,result.extend.record.list[0])*/
+                searchShow(result.extend.type,result.extend.books.size,result.extend.books.list);
+                getPageNum(result.extend.books);
+                ShowPrePage(result.extend.books.prePage)
+                ShowNextPage(result.extend.books.nextPage)
+                showBookRight(result.extend.type,result.extend.books.list[0])
             }else if (result.code==303){
                 alert("莫的权限，请登录");
                 window.location.href="/";
@@ -145,79 +164,73 @@ function getAllBook(pageNum){
         }
     })
 }
-function searchShow(nums,records){
+
+function searchShow(bookType,nums,books){
     $("#Tbody").empty();
-    alert(nums);
     for (var i = 0; i < nums; i++) {
-        var tr = $("<tr id='tr'></tr>").attr("onclick","check("+records[i].id+")");
-        //判断是否选中回显时状态
+        var tr = $("<tr id='tr'></tr>").attr("onclick","check("+books[i].id+")");
         var state=false;
         for(var j=0;j<saveId.length;j++) {
-            if (saveId[j] == records[i].id){
+            if (saveId[j] == books[i].id){
                 state=true;
             }
         }
         if(state==true){
-            var select=$('<td></td>').append($('<input type="checkbox" style="margin-top: 10px;margin-left: 0px" id="checkbox" checked="checked"  class="form-check-input" style="margin-left: 0px">').attr("onclick","ckClick("+nums+','+records[i].id+")"));
+            var select=$('<td></td>').append($('<input type="checkbox" style="margin-top: 10px;margin-left: 0px" id="checkbox" checked="checked"  class="form-check-input" style="margin-left: 0px">').attr("onclick","ckClick("+nums+','+books[i].id+")"));
 
         }else {
-            var select=$('<td></td>').append($('<input type="checkbox"  style="margin-top: 10px;margin-left: 0px" id="checkbox"   class="form-check-input" style="margin-left: 0px">').attr("onclick","ckClick("+nums+','+records[i].id+")"));
+            var select=$('<td></td>').append($('<input type="checkbox"  style="margin-top: 10px;margin-left: 0px" id="checkbox"   class="form-check-input" style="margin-left: 0px">').attr("onclick","ckClick("+nums+','+books[i].id+")"));
         }
         var id = $("<td></td>").append(i + 1);
-        var bookName = $("<td></td>").append(records[i].bookName);
-        var userName= $("<td></td>").append(records[i].userName);
-        var telNumber=$("<td></td>").append(records[i].telNumber);;
-        var outDate= $("<td></td>").append(records[i].outDate);
-        var estimatedDate=$("<td></td>").append(records[i].estimatedDate);
-        var realDate=$("<td></td>").append(records[i].realDate);
+        var bookName = $("<td></td>").append(books[i].bookName);
+        var isbn = $("<td></td>").append(books[i].isbn);
+        var type = $("<td></td>").append(bookType[books[i].type-1].type);
+        var outDate = $("<td></td>").append(books[i].outDate);
+        var outNumber = $("<td></td>").append(books[i].outNumber);
+        var inNumber = $("<td></td>").append(books[i].inNumber);
 
-        bookId.push(records[i].id);
-        tr.append(select).append(id).append(bookName).append(userName).append(telNumber)
-            .append(outDate).append(estimatedDate).append(realDate)
-
+        bookId.push(books[i].id);
+        tr.append(select).append(id).append(bookName).append(isbn).append(type).append(outDate)
+            .append(inNumber).append(outNumber)
         tr.appendTo("#Tbody")
     }
     $("#table").addClass("table table-hover")
 }
-function getFirstPage(){
-    $("#keyword").val("");
-    $("#inputSelect").val("筛选");
-    searchType=null;
-    getAllBook(1);
-}
+
 //分页
-function getPageNum(record){
-    pageNum=record.pageNum;
-    if(record.pageNum>2){
+function getPageNum(books){
+    pageNum=books.pageNum;
+
+    if(books.pageNum>2){
         //控制显示最多几个页码 以及变化的页码数
-        var theFirstPage=record.pageNum-2;
-        var theLastPage=record.pageNum+2;
+        var theFirstPage=books.pageNum-2;
+        var theLastPage=books.pageNum+2;
         //heLastPage>lastPage 控制最大页码数
         //lastPage>=5 控制 最大页码数小于5时导致出现页码0
-        if(theLastPage>record.pages &&record.pages>=5){
-            var theFirstPage=record.pages-4;
-            var theLastPage=record.pages;
-        }else if(theLastPage>record.pages){
+        if(theLastPage>books.pages &&books.pages>=5){
+            var theFirstPage=books.pages-4;
+            var theLastPage=books.pages;
+        }else if(theLastPage>books.pages){
             var theFirstPage=1;
-            var theLastPage=record.pages;
+            var theLastPage=books.pages;
         }
     }else {
         //显示首页加载页码
         var theFirstPage=1;
         var theLastPage=5;
-        if(theLastPage>record.pages){
-            var theLastPage=record.pages;
+        if(theLastPage>books.pages){
+            var theLastPage=books.pages;
         }
     }
     $("#body").empty();
     var pre=$('<li class="page-item"></li>');
-    var prePage=$('<button  class="page-link" id="prePage"></button>').append("上一页").attr("onclick","prePage("+record.prePage+")").attr("type","button");
+    var prePage=$('<button  class="page-link" id="prePage"></button>').append("上一页").attr("onclick","prePage("+books.prePage+")").attr("type","button");
     pre.append(prePage)
     pre.appendTo("#body");
 
     for(var i=theFirstPage;i<=theLastPage;i++){
         var ul=$('<li class="page-item"></li>');
-        if(record.pageNum ==i){
+        if(books.pageNum ==i){
             var page=$('<button  class="btn btn-info"></button>').append(i).attr("onclick","pageNumAjax("+i+")").attr("type","button");
         }
         else {
@@ -229,20 +242,16 @@ function getPageNum(record){
     }
 
     var next=$('<li class="page-item"></li>');
-    var nextPage=$('<button  class="page-link" id="nextPage"></button>').append("下一页").attr("onclick","nextPage("+record.nextPage+")").attr("type","button");
+    var nextPage=$('<button  class="page-link" id="nextPage"></button>').append("下一页").attr("onclick","nextPage("+books.nextPage+")").attr("type","button");
     next.append(nextPage)
     next.appendTo("#body");
 }
 function prePage(prePage){
     bookId.splice(0,bookId.length);
     if(searchType==1){
-        searchRecordByName(prePage,searchContext)
+        searchBooksByName(prePage,searchContext)
     }else if(searchType==2){
-        searchRecordByUserName(prePage,searchContext)
-    }else if(searchType==3){
-        searchBooksByTel(prePage,searchContext);
-    }else {
-        getAllBook(prePage)
+        searchBooksByType(prePage,searchContext)
     }
 }
 function ShowPrePage(prePage){
@@ -253,28 +262,20 @@ function ShowPrePage(prePage){
             .css({'background-color' : '#DDDDDD',color:"#FFFFFF"});
     }
 }
-function pageNumAjax(page)  {
+function pageNumAjax(page){
     bookId.splice(0,bookId.length);
     if(searchType==1){
-        searchRecordByName(page,searchContext)
+        searchBooksByName(page,searchContext)
     }else if(searchType==2){
-        searchRecordByUserName(page,searchContext)
-    }else if(searchType==3){
-        searchBooksByTel(page,searchContext);
-    }else {
-        getAllBook(page)
+        searchBooksByType(page,searchContext)
     }
 }
 function nextPage(nextPage){
     bookId.splice(0,bookId.length);
     if(searchType==1){
-        searchRecordByName(nextPage,searchContext)
+        searchBooksByName(nextPage,searchContext)
     }else if(searchType==2){
-        searchRecordByUserName(nextPage,searchContext)
-    }else if(searchType==3){
-        searchBooksByTel(nextPage,searchContext);
-    }else {
-        getAllBook(nextPage)
+        searchBooksByType(nextPage,searchContext)
     }
 
 }
@@ -395,10 +396,12 @@ function borrow(){
         success:function (result){
             if(result.extend.info==true){
                 alert("选中的书籍有一部分或者全部已经借出")
+                saveId.splice(0,saveId.length);
+                getAllBook(1);
             }else {
+                alert("书籍没有借出，可以借阅")
                 borrowAjax();
             }
-
         }
     });
 }
@@ -412,6 +415,8 @@ function borrowAjax(){
         handlers:{},
         success:function (result){
             if (result.code==200){
+                saveId.splice(0,saveId.length);
+                alert("借出成功")
                 getAllBook(1);
             } else if (result.code==303){
                 alert("莫的权限，请登录");

@@ -14,23 +14,21 @@ public class StaticController {
     public String gotoIndex(){
         return "index";
     }
-
     @GetMapping("/register")
     public String gotoRegister(){
         return "register";
     }
-    @GetMapping("/books")
-    public String books(){
-        return "/admin/books";
-    }
+
+
     @GetMapping("/book")
     public String gotoBook(){
-        return "/html/book";
+        return "/book/book";
     }
     @GetMapping("/addbook")
     public String gotoAddBook(){
-        return "/html/addbook";
+        return "/book/addbook";
     }
+    /*
     @GetMapping("/putBook")
     public String putBook(){
         return "/admin/book_add";
@@ -38,10 +36,10 @@ public class StaticController {
     @GetMapping("/update")
     public String update(){
         return "/admin/book_edit";
-    }
+    }*/
     @GetMapping("searchBook")
     public String searchBook(){
-        return "/admin/book_search_result";
+        return "/book/book_search_result";
     }
     @GetMapping("/readers")
     public String readers(){
@@ -49,7 +47,11 @@ public class StaticController {
     }
     @GetMapping("/records")
     public String records(){
-        return "/admin/records";
+        return "/book/records";
+    }
+    @GetMapping("/borrow")
+    public String borrow(){
+        return "/book/borrow";
     }
     @GetMapping("/ownRecord")
     public String ownRecord(){

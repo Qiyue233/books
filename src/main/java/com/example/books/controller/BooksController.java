@@ -25,11 +25,12 @@ public class BooksController {
     @Resource
     BooksService booksService;
     //修改时根据id获取书籍信息
+    /*
     @GetMapping("/updateById")
     @JwtToken
     public Msg updateById( int id){
         return booksService.getBookById(id);
-    }
+    }*/
     //进行修改
     @PostMapping("/updateAjax")
     @JwtToken

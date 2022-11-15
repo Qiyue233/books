@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ch" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:value="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>图书管理系统</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{css/book.css}">
+    <style>
+        li{
+            float: left
+        }
+
+    </style>
+</head>
+<body style="overflow-x: hidden">
+<!--导航栏替换-->
+<div th:replace="~{commons/commons :: topbar(active='records.html')}"></div>
+<div class="row" style="height: 700px">
+    <div class="col-8" style="border-right: #dde1e5 solid 1px">
+        <div class="row" id="inputGroup">
+            <div class="col-2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button"  onclick="getFirstPage()">全部</button>
+                </div>
+            </div>
+
+            <div class="col-5 offset-5">
+                <!--start 输入组-->
+                <div class="input-group mb-3" id="inputRight">
+                    <select id="inputSelect" style="width: 25%" onchange="selectTypeRight()">
+                        <option selected>筛选</option>
+                        <option value="1">书名查询</option>
+                        <option value="2">借阅人查询</option>
+                        <option value="3">联系电话查询</option>
+                    </select>
+                    <input type="text" class="form-control" aria-label="Text input with dropdown button" id="keyword">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="getSelectTypeAndName()">搜索</button>
+                    </div>
+                </div>
+                <!--end 输入值结束-->
+            </div>
+        </div>
+        <div class="row" style="height: 80%">
+            <div class="col" id="form">
+                <table id="table" class="table table-hover">
+                    <thead style="font-size: 20px">
+                    <th>#</th>
+                    <th>序号</th>
+                    <th>书名</th>
+                    <th>借阅人</th>
+                    <th>联系电话</th>
+                    <th>借出日期</th>
+                    <th>预计归还日期</th>
+                    <th>实际归还日期</th>
+                    </thead>
+                    <tbody id="Tbody" style="font-size: 20px"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row" style="height: 9%">
+
+            <div class="col-2">
+                <div class="form-check" style="margin-left: 15%">
+                    <input type="checkbox" class="form-check-input" id="allCheck" onclick="allCheck()">
+                    <label class="form-check-label" for="allCheck">
+                        本页全选
+                    </label>
+                </div>
+            </div>
+
+            <!--start分页条 -->
+            <div class="col-4 offset-2 ">
+                <ul class="pagination justify-content-center"  >
+                    <!-- <li class="page-item " >
+                         <button class="page-link" onclick="prePage()">上一页</button>
+                     </li>-->
+                    <div id="body" ></div>
+                    <!--<li class="page-item"><button class="page-link" id="left"   value="1" onclick="">1</button></li>
+                    <li class="page-item"><button class="page-link" id="center" value="2" onclick="PageJump()">2</button></li>
+                    <li class="page-item"><button class="page-link" id="right"  value="3" onclick="">3</button></li>-->
+                    <!-- <li class="page-item">
+                         <button class="page-link" onclick="nextPage()">下一页</button>
+                     </li>-->
+                </ul>
+            </div>
+            <!--end分页条结束-->
+
+            <div class="col-2 offset-2">
+                <button type="button" id="delete" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" onclick="borrow()">借出</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-4">
+        <div id="rightBody"></div>
+        <div class="row">
+            <label for="bookName">
+                <input id="bookName" style="border: 0;font-size: 200%;margin-left:50%;color: black" readonly="readonly">
+            </label>
+        </div>
+        <div class="row" style="height: 80%">
+            <div class="row" style="margin-left: 10px;">
+                <label style="font-size: 150%" for="author">作者:
+                    <input id="author"  style="border: 0" value=""readonly="readonly">
+                </label>
+            </div>
+            <div class="row" style="margin-left: 10px;">
+                <label style="font-size: 150%" for="cip">CIP:
+                    <input style="border: 0" id="cip" value="" readonly="readonly">
+                </label>
+            </div>
+            <div class="row" style="margin-left: 10px;">
+                <label style="font-size: 150%" for="isbn">ISBN:
+                    <input style="border: 0" id="isbn" value="" readonly="readonly">
+                </label>
+            </div>
+            <div class="row" style="margin-left: 10px;">
+                <label style="font-size: 150%" for="type">类型:
+                    <input style="border: 0" id="type" value="" readonly="readonly">
+                </label>
+            </div>
+
+            <div class="row" style="margin-left: 10px;">
+                <label style="font-size: 150%" for="inNumber">馆存:
+                    <input style="border: 0" id="inNumber" value="" readonly="readonly">
+                </label>
+            </div>
+            <div class="row" style="margin-left: 10px;">
+                <label style="font-size: 150%" for="outNumber">馆外:
+                    <input style="border: 0" id="outNumber" value="" readonly="readonly">
+                </label>
+            </div>
+            <div class="row" style="margin-left: 10px;">
+                <label style="font-size: 150%" for="setPrice">定价:
+                    <input style="border: 0"  id="setPrice" value="" readonly="readonly">
+                </label>
+            </div>
+            <div class="row" style="margin-left: 10px;">
+                <label style="font-size: 150%" for="outDate">发行时间:
+                    <input style="border: 0" id="outDate" value="" readonly="readonly">
+                </label>
+            </div>
+            <div class="row" style="margin-left: 10px;">
+                <label style="font-size: 150%" for="publisher">出版社:
+                    <input style="border: 0" id="publisher" value="" readonly="readonly">
+                </label>
+                <label style="font-size: 150%" for="state">状态:
+                    <input style="border: 0" id="state" value="" readonly="readonly">
+                </label>
+            </div>
+
+        </div>
+        <div class="row" style="height: 9%;margin-top: 12px">
+            <div class="col-2 " style="width:10px;margin-left: 70%;">
+                <input type="button"  class="btn btn-info"  style="margin-left: 1px" value="借出" onclick="borrow()">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script th:src="@{js/record.js}"></script>
+</body>
+</html>

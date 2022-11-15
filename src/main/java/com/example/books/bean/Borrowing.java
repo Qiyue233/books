@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -15,14 +17,18 @@ public class Borrowing {
     int id;
     @TableField("bookId")
     int bookId;
-    @TableField("back")
-    boolean back;
-    @TableField("out_time")
-    Data outTime;
-    @TableField("estimated_time")
-    Data estimatedTime;
-    @TableField("real_time")
-    Data realTime;
+    @TableField("bookName")
+    String bookName;
+    @TableField("userName")
+    String userName;
+    @TableField("telNumber")
+    String telNumber;
+    @TableField("out_date")
+    Date outDate;
+    @TableField("estimated_date")
+    Date estimatedDate;
+    @TableField("real_date")
+    Date realDate;
     @TableField("deposit")
     double deposit;
     @TableField("back_deposit")

@@ -48,8 +48,6 @@ public class AddBookServiceImpl extends ServiceImpl<BookLogMapper, BookLog> impl
         java.util.Date date = new java.util.Date();
         SimpleDateFormat queueDateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String input_time = queueDateFormat.format(date);
-        System.out.println(uid);
-        System.out.println(input_time);
         bookLogMapper.insert(uid,isbn,input_time,setPrice,price,number);
         return Msg.success();
     }

@@ -175,7 +175,7 @@ function check(id){
         url:"/checkById",
         type:"GET",
         handlers:{},
-        data:{id,id},
+        data:{id:id},
         success:function (result){
             if (result.code==200)
             showBookRight(result.extend.type,result.extend.books)

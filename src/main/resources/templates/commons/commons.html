@@ -22,12 +22,12 @@
                th:href="@{/readers}">读者管理</a>
         </li>
         <li class="nav-item">
-            <a th:class="${active=='records.html'? 'nav-link active' : 'nav-link'}"
-               th:href="@{/records}">借还管理</a>
+            <a th:class="${active=='borrow.html'? 'nav-link active' : 'nav-link'}"
+               th:href="@{/borrow}">借阅图书</a>
         </li>
         <li class="nav-item">
             <a th:class="${active=='ownRecord.html'? 'nav-link active' : 'nav-link'}"
-               th:href="@{/ownRecord}">借阅记录</a>
+               th:href="@{/records}">借阅记录</a>
         </li>
         <li class="nav-item">
             <a th:class="${active=='addbook.html'? 'nav-link active' : 'nav-link'}"

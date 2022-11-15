@@ -48,13 +48,12 @@ public class GetBookServiceImpl extends ServiceImpl<BooksMapper, Books> implemen
 
     @Override
     public Msg getBookById(int id) {
-
         return Msg.success().add("books",booksMapper.selectById(id)).add("type",bookTypeService.list());
     }
 
     @Override
     public Msg getBookByName(Integer pageNum,String book_name) {
-        PageHelper.startPage(pageNum,1);
+        PageHelper.startPage(pageNum,6);
         List<Books> list= booksMapper.selectByName(book_name);
         //将查询到的数据封装到PageInfo
         PageInfo<Books> pageInfo=new PageInfo<>(list);
